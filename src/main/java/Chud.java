@@ -41,7 +41,7 @@ public class Chud {
                 System.out.println("       " + tasks[taskNumber - 1]);
             } else if (input.startsWith("todo ")) {
                 String description = input.substring(5).trim();
-                tasks[taskCount] = Task.createTodo(description);
+                tasks[taskCount] = new Todo(description);
                 taskCount++;
                 printTaskAdded(tasks[taskCount - 1], taskCount);
             } else if (input.startsWith("deadline ")) {
@@ -52,7 +52,7 @@ public class Chud {
                 } else {
                     String description = remainder.substring(0, byIndex).trim();
                     String by = remainder.substring(byIndex + 4).trim();
-                    tasks[taskCount] = Task.createDeadline(description, by);
+                    tasks[taskCount] = new Deadline(description, by);
                     taskCount++;
                     printTaskAdded(tasks[taskCount - 1], taskCount);
                 }
@@ -66,7 +66,7 @@ public class Chud {
                     String description = remainder.substring(0, fromIndex).trim();
                     String from = remainder.substring(fromIndex + 6, toIndex).trim();
                     String to = remainder.substring(toIndex + 4).trim();
-                    tasks[taskCount] = Task.createEvent(description, from, to);
+                    tasks[taskCount] = new Event(description, from, to);
                     taskCount++;
                     printTaskAdded(tasks[taskCount - 1], taskCount);
                 }
