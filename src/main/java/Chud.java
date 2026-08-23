@@ -24,55 +24,95 @@ public class Chud {
         String input = scanner.nextLine();
         while (!input.equals("bye")) {
             System.out.println(horizontalLine);
-            if (input.equals("list")) {
-                System.out.println("     Here are the tasks in your list:");
-                for (int i = 0; i < taskCount; i++) {
-                    System.out.println("     " + (i + 1) + "." + tasks[i]);
+
+            int spaceIndex = input.indexOf(' ');
+            String commandWord = spaceIndex == -1 ? input : input.substring(0, spaceIndex);
+            String arguments = spaceIndex == -1 ? "" : input.substring(spaceIndex + 1).trim();
+
+            try {
+                switch (commandWord) {
+                case "list":
+                    System.out.println("     Here are the tasks in your list:");
+                    for (int i = 0; i < taskCount; i++) {
+                        System.out.println("     " + (i + 1) + "." + tasks[i]);
+                    }
+                    break;
+                case "mark": {
+                    int taskIndex = parseTaskIndex(arguments, taskCount);
+                    tasks[taskIndex].markAsDone();
+                    System.out.println("     Nice! I've marked this task as done:");
+                    System.out.println("       " + tasks[taskIndex]);
+                    break;
                 }
-            } else if (input.startsWith("mark ")) {
-                int taskNumber = Integer.parseInt(input.substring(5).trim());
-                tasks[taskNumber - 1].markAsDone();
-                System.out.println("     Nice! I've marked this task as done:");
-                System.out.println("       " + tasks[taskNumber - 1]);
-            } else if (input.startsWith("unmark ")) {
-                int taskNumber = Integer.parseInt(input.substring(7).trim());
-                tasks[taskNumber - 1].markAsNotDone();
-                System.out.println("     OK, I've marked this task as not done yet:");
-                System.out.println("       " + tasks[taskNumber - 1]);
-            } else if (input.startsWith("todo ")) {
-                String description = input.substring(5).trim();
-                tasks[taskCount] = new Todo(description);
-                taskCount++;
-                printTaskAdded(tasks[taskCount - 1], taskCount);
-            } else if (input.startsWith("deadline ")) {
-                String remainder = input.substring(9);
-                int byIndex = remainder.indexOf("/by ");
-                if (byIndex == -1) {
-                    System.out.println("     A deadline needs a '/by' date/time, e.g. deadline return book /by Sunday");
-                } else {
-                    String description = remainder.substring(0, byIndex).trim();
-                    String by = remainder.substring(byIndex + 4).trim();
+                case "unmark": {
+                    int taskIndex = parseTaskIndex(arguments, taskCount);
+                    tasks[taskIndex].markAsNotDone();
+                    System.out.println("     OK, I've marked this task as not done yet:");
+                    System.out.println("       " + tasks[taskIndex]);
+                    break;
+                }
+                case "todo": {
+                    if (arguments.isEmpty()) {
+                        throw new ChudException("The description of a todo cannot be empty. Try: todo borrow book");
+                    }
+                    checkListNotFull(taskCount);
+                    tasks[taskCount] = new Todo(arguments);
+                    taskCount++;
+                    printTaskAdded(tasks[taskCount - 1], taskCount);
+                    break;
+                }
+                case "deadline": {
+                    int byIndex = arguments.indexOf("/by ");
+                    if (byIndex == -1) {
+                        throw new ChudException("A deadline needs a '/by' date/time. Try: deadline return book /by Sunday");
+                    }
+                    String description = arguments.substring(0, byIndex).trim();
+                    String by = arguments.substring(byIndex + 4).trim();
+                    if (description.isEmpty()) {
+                        throw new ChudException("The description of a deadline cannot be empty. Try: deadline return book /by Sunday");
+                    }
+                    if (by.isEmpty()) {
+                        throw new ChudException("The '/by' date/time of a deadline cannot be empty. Try: deadline return book /by Sunday");
+                    }
+                    checkListNotFull(taskCount);
                     tasks[taskCount] = new Deadline(description, by);
                     taskCount++;
                     printTaskAdded(tasks[taskCount - 1], taskCount);
+                    break;
                 }
-            } else if (input.startsWith("event ")) {
-                String remainder = input.substring(6);
-                int fromIndex = remainder.indexOf("/from ");
-                int toIndex = remainder.indexOf("/to ");
-                if (fromIndex == -1 || toIndex == -1 || toIndex < fromIndex) {
-                    System.out.println("     An event needs '/from' and '/to' date/times, e.g. event project meeting /from Mon 2pm /to 4pm");
-                } else {
-                    String description = remainder.substring(0, fromIndex).trim();
-                    String from = remainder.substring(fromIndex + 6, toIndex).trim();
-                    String to = remainder.substring(toIndex + 4).trim();
+                case "event": {
+                    int fromIndex = arguments.indexOf("/from ");
+                    int toIndex = arguments.indexOf("/to ");
+                    if (fromIndex == -1 || toIndex == -1 || toIndex < fromIndex) {
+                        throw new ChudException(
+                                "An event needs both '/from' and '/to' date/times, in that order. "
+                                        + "Try: event project meeting /from Mon 2pm /to 4pm");
+                    }
+                    String description = arguments.substring(0, fromIndex).trim();
+                    String from = arguments.substring(fromIndex + 6, toIndex).trim();
+                    String to = arguments.substring(toIndex + 4).trim();
+                    if (description.isEmpty()) {
+                        throw new ChudException("The description of an event cannot be empty. "
+                                + "Try: event project meeting /from Mon 2pm /to 4pm");
+                    }
+                    if (from.isEmpty() || to.isEmpty()) {
+                        throw new ChudException("The '/from' and '/to' date/times of an event cannot be empty. "
+                                + "Try: event project meeting /from Mon 2pm /to 4pm");
+                    }
+                    checkListNotFull(taskCount);
                     tasks[taskCount] = new Event(description, from, to);
                     taskCount++;
                     printTaskAdded(tasks[taskCount - 1], taskCount);
+                    break;
                 }
-            } else {
-                System.out.println("     I'm sorry, I don't know what that means :-(");
+                default:
+                    throw new ChudException("I don't know what '" + commandWord + "' means. "
+                            + "Try list, todo, deadline, event, mark, unmark, or bye.");
+                }
+            } catch (ChudException e) {
+                System.out.println("     OOPS!!! " + e.getMessage());
             }
+
             System.out.println(horizontalLine);
             input = scanner.nextLine();
         }
@@ -86,5 +126,32 @@ public class Chud {
         System.out.println("     Got it. I've added this task:");
         System.out.println("       " + task);
         System.out.println("     Now you have " + taskCount + " tasks in the list.");
+    }
+
+    private static void checkListNotFull(int taskCount) throws ChudException {
+        if (taskCount >= MAX_TASKS) {
+            throw new ChudException("Your task list is full (" + MAX_TASKS + " tasks max). Please clear some tasks first.");
+        }
+    }
+
+    /**
+     * Parses a 1-based task number typed by the user and returns the matching 0-based array index,
+     * throwing a ChudException with a specific explanation for every way the input can be invalid.
+     */
+    private static int parseTaskIndex(String arguments, int taskCount) throws ChudException {
+        if (arguments.isEmpty()) {
+            throw new ChudException("Tell me which task number, e.g. mark 2");
+        }
+        int taskNumber;
+        try {
+            taskNumber = Integer.parseInt(arguments);
+        } catch (NumberFormatException e) {
+            throw new ChudException("'" + arguments + "' is not a valid task number.");
+        }
+        if (taskNumber < 1 || taskNumber > taskCount) {
+            throw new ChudException("There is no task number " + taskNumber + ". "
+                    + (taskCount == 0 ? "Your task list is empty." : "You have " + taskCount + " task(s)."));
+        }
+        return taskNumber - 1;
     }
 }
