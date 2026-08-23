@@ -218,7 +218,7 @@ bye
 
 ## Test Case: Unrecognized command
 
-**Aim:** A command that isn't `list`, `mark`, `unmark`, `todo`, `deadline`, `event`, or `bye` gets a graceful, specific error instead of crashing or being silently added.
+**Aim:** A command that isn't `list`, `mark`, `unmark`, `delete`, `todo`, `deadline`, `event`, or `bye` gets a graceful, specific error instead of crashing or being silently added.
 
 **Input:**
 ```
@@ -240,7 +240,7 @@ bye
 
 frobnicate
     ____________________________________________________________
-     OOPS!!! I don't know what 'frobnicate' means. Try list, todo, deadline, event, mark, unmark, or bye.
+     OOPS!!! I don't know what 'frobnicate' means. Try list, todo, deadline, event, mark, unmark, delete, or bye.
     ____________________________________________________________
 
 bye
@@ -441,6 +441,189 @@ mark 0
 unmark 99
     ____________________________________________________________
      OOPS!!! There is no task number 99. You have 1 task(s).
+    ____________________________________________________________
+
+bye
+    ____________________________________________________________
+     Bye. Hope to see you again soon!
+    ____________________________________________________________
+```
+
+## Test Case: Delete a task
+
+**Aim:** `delete` removes the given task from the list, acknowledges what was removed, and reports the new task count; `list` reflects the removal.
+
+**Input:**
+```
+todo read book
+deadline return book /by June 6th
+event project meeting /from Aug 6th 2pm /to 4pm
+todo join sports club
+todo borrow book
+mark 1
+mark 2
+mark 4
+list
+delete 3
+list
+bye
+```
+
+**Expected Output:**
+```
+    ____________________________________________________________
+  ____ _               _ 
+ / ___| |__  _   _  __| |
+| |   | '_ \| | | |/ _` |
+| |___| | | | |_| | (_| |
+ \____|_| |_|\__,_|\__,_|
+     Hello! I'm Chud.
+     What can I do for you?
+    ____________________________________________________________
+
+todo read book
+    ____________________________________________________________
+     Got it. I've added this task:
+       [T][ ] read book
+     Now you have 1 tasks in the list.
+    ____________________________________________________________
+
+deadline return book /by June 6th
+    ____________________________________________________________
+     Got it. I've added this task:
+       [D][ ] return book (by: June 6th)
+     Now you have 2 tasks in the list.
+    ____________________________________________________________
+
+event project meeting /from Aug 6th 2pm /to 4pm
+    ____________________________________________________________
+     Got it. I've added this task:
+       [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+     Now you have 3 tasks in the list.
+    ____________________________________________________________
+
+todo join sports club
+    ____________________________________________________________
+     Got it. I've added this task:
+       [T][ ] join sports club
+     Now you have 4 tasks in the list.
+    ____________________________________________________________
+
+todo borrow book
+    ____________________________________________________________
+     Got it. I've added this task:
+       [T][ ] borrow book
+     Now you have 5 tasks in the list.
+    ____________________________________________________________
+
+mark 1
+    ____________________________________________________________
+     Nice! I've marked this task as done:
+       [T][X] read book
+    ____________________________________________________________
+
+mark 2
+    ____________________________________________________________
+     Nice! I've marked this task as done:
+       [D][X] return book (by: June 6th)
+    ____________________________________________________________
+
+mark 4
+    ____________________________________________________________
+     Nice! I've marked this task as done:
+       [T][X] join sports club
+    ____________________________________________________________
+
+list
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[T][X] read book
+     2.[D][X] return book (by: June 6th)
+     3.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+     4.[T][X] join sports club
+     5.[T][ ] borrow book
+    ____________________________________________________________
+
+delete 3
+    ____________________________________________________________
+     Noted. I've removed this task:
+       [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+     Now you have 4 tasks in the list.
+    ____________________________________________________________
+
+list
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[T][X] read book
+     2.[D][X] return book (by: June 6th)
+     3.[T][X] join sports club
+     4.[T][ ] borrow book
+    ____________________________________________________________
+
+bye
+    ____________________________________________________________
+     Bye. Hope to see you again soon!
+    ____________________________________________________________
+```
+
+## Test Case: Delete validation errors
+
+**Aim:** `delete` with a missing, non-numeric, or out-of-range task number is rejected with a specific error instead of crashing, and does not change the list.
+
+**Input:**
+```
+delete
+delete abc
+delete 1
+todo read book
+delete 5
+list
+bye
+```
+
+**Expected Output:**
+```
+    ____________________________________________________________
+  ____ _               _ 
+ / ___| |__  _   _  __| |
+| |   | '_ \| | | |/ _` |
+| |___| | | | |_| | (_| |
+ \____|_| |_|\__,_|\__,_|
+     Hello! I'm Chud.
+     What can I do for you?
+    ____________________________________________________________
+
+delete
+    ____________________________________________________________
+     OOPS!!! Tell me which task number, e.g. delete 2
+    ____________________________________________________________
+
+delete abc
+    ____________________________________________________________
+     OOPS!!! 'abc' is not a valid task number.
+    ____________________________________________________________
+
+delete 1
+    ____________________________________________________________
+     OOPS!!! There is no task number 1. Your task list is empty.
+    ____________________________________________________________
+
+todo read book
+    ____________________________________________________________
+     Got it. I've added this task:
+       [T][ ] read book
+     Now you have 1 tasks in the list.
+    ____________________________________________________________
+
+delete 5
+    ____________________________________________________________
+     OOPS!!! There is no task number 5. You have 1 task(s).
+    ____________________________________________________________
+
+list
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[T][ ] read book
     ____________________________________________________________
 
 bye

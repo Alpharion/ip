@@ -1,8 +1,7 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Chud {
-    private static final int MAX_TASKS = 100;
-
     public static void main(String[] args) {
         String banner = "  ____ _               _ \n"
                 + " / ___| |__  _   _  __| |\n"
@@ -17,8 +16,7 @@ public class Chud {
         System.out.println("     What can I do for you?");
         System.out.println(horizontalLine);
 
-        Task[] tasks = new Task[MAX_TASKS];
-        int taskCount = 0;
+        ArrayList<Task> tasks = new ArrayList<>();
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
@@ -33,32 +31,38 @@ public class Chud {
                 switch (commandWord) {
                 case "list":
                     System.out.println("     Here are the tasks in your list:");
-                    for (int i = 0; i < taskCount; i++) {
-                        System.out.println("     " + (i + 1) + "." + tasks[i]);
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println("     " + (i + 1) + "." + tasks.get(i));
                     }
                     break;
                 case "mark": {
-                    int taskIndex = parseTaskIndex(arguments, taskCount);
-                    tasks[taskIndex].markAsDone();
+                    int taskIndex = parseTaskIndex(arguments, tasks.size(), "mark");
+                    tasks.get(taskIndex).markAsDone();
                     System.out.println("     Nice! I've marked this task as done:");
-                    System.out.println("       " + tasks[taskIndex]);
+                    System.out.println("       " + tasks.get(taskIndex));
                     break;
                 }
                 case "unmark": {
-                    int taskIndex = parseTaskIndex(arguments, taskCount);
-                    tasks[taskIndex].markAsNotDone();
+                    int taskIndex = parseTaskIndex(arguments, tasks.size(), "unmark");
+                    tasks.get(taskIndex).markAsNotDone();
                     System.out.println("     OK, I've marked this task as not done yet:");
-                    System.out.println("       " + tasks[taskIndex]);
+                    System.out.println("       " + tasks.get(taskIndex));
+                    break;
+                }
+                case "delete": {
+                    int taskIndex = parseTaskIndex(arguments, tasks.size(), "delete");
+                    Task removedTask = tasks.remove(taskIndex);
+                    System.out.println("     Noted. I've removed this task:");
+                    System.out.println("       " + removedTask);
+                    System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
                     break;
                 }
                 case "todo": {
                     if (arguments.isEmpty()) {
                         throw new ChudException("The description of a todo cannot be empty. Try: todo borrow book");
                     }
-                    checkListNotFull(taskCount);
-                    tasks[taskCount] = new Todo(arguments);
-                    taskCount++;
-                    printTaskAdded(tasks[taskCount - 1], taskCount);
+                    tasks.add(new Todo(arguments));
+                    printTaskAdded(tasks.get(tasks.size() - 1), tasks.size());
                     break;
                 }
                 case "deadline": {
@@ -74,10 +78,8 @@ public class Chud {
                     if (by.isEmpty()) {
                         throw new ChudException("The '/by' date/time of a deadline cannot be empty. Try: deadline return book /by Sunday");
                     }
-                    checkListNotFull(taskCount);
-                    tasks[taskCount] = new Deadline(description, by);
-                    taskCount++;
-                    printTaskAdded(tasks[taskCount - 1], taskCount);
+                    tasks.add(new Deadline(description, by));
+                    printTaskAdded(tasks.get(tasks.size() - 1), tasks.size());
                     break;
                 }
                 case "event": {
@@ -99,15 +101,13 @@ public class Chud {
                         throw new ChudException("The '/from' and '/to' date/times of an event cannot be empty. "
                                 + "Try: event project meeting /from Mon 2pm /to 4pm");
                     }
-                    checkListNotFull(taskCount);
-                    tasks[taskCount] = new Event(description, from, to);
-                    taskCount++;
-                    printTaskAdded(tasks[taskCount - 1], taskCount);
+                    tasks.add(new Event(description, from, to));
+                    printTaskAdded(tasks.get(tasks.size() - 1), tasks.size());
                     break;
                 }
                 default:
                     throw new ChudException("I don't know what '" + commandWord + "' means. "
-                            + "Try list, todo, deadline, event, mark, unmark, or bye.");
+                            + "Try list, todo, deadline, event, mark, unmark, delete, or bye.");
                 }
             } catch (ChudException e) {
                 System.out.println("     OOPS!!! " + e.getMessage());
@@ -128,19 +128,13 @@ public class Chud {
         System.out.println("     Now you have " + taskCount + " tasks in the list.");
     }
 
-    private static void checkListNotFull(int taskCount) throws ChudException {
-        if (taskCount >= MAX_TASKS) {
-            throw new ChudException("Your task list is full (" + MAX_TASKS + " tasks max). Please clear some tasks first.");
-        }
-    }
-
     /**
-     * Parses a 1-based task number typed by the user and returns the matching 0-based array index,
+     * Parses a 1-based task number typed by the user and returns the matching 0-based list index,
      * throwing a ChudException with a specific explanation for every way the input can be invalid.
      */
-    private static int parseTaskIndex(String arguments, int taskCount) throws ChudException {
+    private static int parseTaskIndex(String arguments, int taskCount, String commandWord) throws ChudException {
         if (arguments.isEmpty()) {
-            throw new ChudException("Tell me which task number, e.g. mark 2");
+            throw new ChudException("Tell me which task number, e.g. " + commandWord + " 2");
         }
         int taskNumber;
         try {
