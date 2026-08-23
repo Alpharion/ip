@@ -28,28 +28,28 @@ public class Chud {
             String arguments = spaceIndex == -1 ? "" : input.substring(spaceIndex + 1).trim();
 
             try {
-                switch (commandWord) {
-                case "list":
+                switch (Command.fromCommandWord(commandWord)) {
+                case LIST:
                     System.out.println("     Here are the tasks in your list:");
                     for (int i = 0; i < tasks.size(); i++) {
                         System.out.println("     " + (i + 1) + "." + tasks.get(i));
                     }
                     break;
-                case "mark": {
+                case MARK: {
                     int taskIndex = parseTaskIndex(arguments, tasks.size(), "mark");
                     tasks.get(taskIndex).markAsDone();
                     System.out.println("     Nice! I've marked this task as done:");
                     System.out.println("       " + tasks.get(taskIndex));
                     break;
                 }
-                case "unmark": {
+                case UNMARK: {
                     int taskIndex = parseTaskIndex(arguments, tasks.size(), "unmark");
                     tasks.get(taskIndex).markAsNotDone();
                     System.out.println("     OK, I've marked this task as not done yet:");
                     System.out.println("       " + tasks.get(taskIndex));
                     break;
                 }
-                case "delete": {
+                case DELETE: {
                     int taskIndex = parseTaskIndex(arguments, tasks.size(), "delete");
                     Task removedTask = tasks.remove(taskIndex);
                     System.out.println("     Noted. I've removed this task:");
@@ -57,7 +57,7 @@ public class Chud {
                     System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
                     break;
                 }
-                case "todo": {
+                case TODO: {
                     if (arguments.isEmpty()) {
                         throw new ChudException("The description of a todo cannot be empty. Try: todo borrow book");
                     }
@@ -65,7 +65,7 @@ public class Chud {
                     printTaskAdded(tasks.get(tasks.size() - 1), tasks.size());
                     break;
                 }
-                case "deadline": {
+                case DEADLINE: {
                     int byIndex = arguments.indexOf("/by ");
                     if (byIndex == -1) {
                         throw new ChudException("A deadline needs a '/by' date/time. Try: deadline return book /by Sunday");
@@ -82,7 +82,7 @@ public class Chud {
                     printTaskAdded(tasks.get(tasks.size() - 1), tasks.size());
                     break;
                 }
-                case "event": {
+                case EVENT: {
                     int fromIndex = arguments.indexOf("/from ");
                     int toIndex = arguments.indexOf("/to ");
                     if (fromIndex == -1 || toIndex == -1 || toIndex < fromIndex) {
@@ -105,6 +105,8 @@ public class Chud {
                     printTaskAdded(tasks.get(tasks.size() - 1), tasks.size());
                     break;
                 }
+                case BYE:
+                case UNKNOWN:
                 default:
                     throw new ChudException("I don't know what '" + commandWord + "' means. "
                             + "Try list, todo, deadline, event, mark, unmark, delete, or bye.");

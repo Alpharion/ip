@@ -9,8 +9,8 @@ public class Event extends Task {
     }
 
     @Override
-    public String getTaskType() {
-        return "E";
+    public TaskType getTaskType() {
+        return TaskType.EVENT;
     }
 
     @Override
