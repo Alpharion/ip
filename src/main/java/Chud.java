@@ -39,10 +39,39 @@ public class Chud {
                 tasks[taskNumber - 1].markAsNotDone();
                 System.out.println("     OK, I've marked this task as not done yet:");
                 System.out.println("       " + tasks[taskNumber - 1]);
-            } else {
-                tasks[taskCount] = new Task(input);
+            } else if (input.startsWith("todo ")) {
+                String description = input.substring(5).trim();
+                tasks[taskCount] = Task.createTodo(description);
                 taskCount++;
-                System.out.println("     added: " + input);
+                printTaskAdded(tasks[taskCount - 1], taskCount);
+            } else if (input.startsWith("deadline ")) {
+                String remainder = input.substring(9);
+                int byIndex = remainder.indexOf("/by ");
+                if (byIndex == -1) {
+                    System.out.println("     A deadline needs a '/by' date/time, e.g. deadline return book /by Sunday");
+                } else {
+                    String description = remainder.substring(0, byIndex).trim();
+                    String by = remainder.substring(byIndex + 4).trim();
+                    tasks[taskCount] = Task.createDeadline(description, by);
+                    taskCount++;
+                    printTaskAdded(tasks[taskCount - 1], taskCount);
+                }
+            } else if (input.startsWith("event ")) {
+                String remainder = input.substring(6);
+                int fromIndex = remainder.indexOf("/from ");
+                int toIndex = remainder.indexOf("/to ");
+                if (fromIndex == -1 || toIndex == -1 || toIndex < fromIndex) {
+                    System.out.println("     An event needs '/from' and '/to' date/times, e.g. event project meeting /from Mon 2pm /to 4pm");
+                } else {
+                    String description = remainder.substring(0, fromIndex).trim();
+                    String from = remainder.substring(fromIndex + 6, toIndex).trim();
+                    String to = remainder.substring(toIndex + 4).trim();
+                    tasks[taskCount] = Task.createEvent(description, from, to);
+                    taskCount++;
+                    printTaskAdded(tasks[taskCount - 1], taskCount);
+                }
+            } else {
+                System.out.println("     I'm sorry, I don't know what that means :-(");
             }
             System.out.println(horizontalLine);
             input = scanner.nextLine();
@@ -51,5 +80,11 @@ public class Chud {
         System.out.println(horizontalLine);
         System.out.println("     Bye. Hope to see you again soon!");
         System.out.println(horizontalLine);
+    }
+
+    private static void printTaskAdded(Task task, int taskCount) {
+        System.out.println("     Got it. I've added this task:");
+        System.out.println("       " + task);
+        System.out.println("     Now you have " + taskCount + " tasks in the list.");
     }
 }
