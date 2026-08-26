@@ -16,8 +16,8 @@ public class Chud {
         System.out.println("     What can I do for you?");
         System.out.println(horizontalLine);
 
-        ArrayList<Task> tasks = new ArrayList<>();
         Storage storage = new Storage();
+        ArrayList<Task> tasks = storage.load();
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();

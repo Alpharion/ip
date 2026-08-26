@@ -51,6 +51,7 @@ from __future__ import annotations
 
 import argparse
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -138,6 +139,11 @@ def compile_program(repo_root: Path, source_dir: str, build_dir: Path) -> Path:
 
 
 def run_program(repo_root: Path, classes_dir: Path, main_class: str, inputs: list[str]) -> str:
+    # Each test case must start from a clean slate: the program persists its task list to
+    # ./data (relative to repo_root) between runs, so stale data from an earlier test case
+    # would otherwise leak into this one.
+    shutil.rmtree(repo_root / "data", ignore_errors=True)
+
     stdin_text = "\n".join(inputs) + "\n"
     result = subprocess.run(
         ["java", "-cp", str(classes_dir), main_class],
