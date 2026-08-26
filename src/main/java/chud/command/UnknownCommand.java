@@ -9,6 +9,7 @@ import chud.ui.Ui;
 public class UnknownCommand extends Command {
     private final String commandWord;
 
+    /** Creates a command that will report the given unrecognized command word as an error. */
     public UnknownCommand(String commandWord) {
         this.commandWord = commandWord;
     }

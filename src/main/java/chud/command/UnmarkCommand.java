@@ -10,6 +10,7 @@ import chud.ui.Ui;
 public class UnmarkCommand extends Command {
     private final String arguments;
 
+    /** Creates a command that will unmark the task at the raw (not yet validated) index text. */
     public UnmarkCommand(String arguments) {
         this.arguments = arguments;
     }

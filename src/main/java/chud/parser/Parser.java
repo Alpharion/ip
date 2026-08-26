@@ -71,10 +71,17 @@ public class Parser {
     }
 
     /**
-     * Parses a 1-based task number typed by the user and returns the matching 0-based list index,
-     * throwing a ChudException with a specific explanation for every way the input can be invalid.
+     * Parses a 1-based task number typed by the user and returns the matching 0-based list index.
+     *
+     * @param arguments The raw text typed after the command word (expected to be a task number).
+     * @param taskCount The current number of tasks, used to validate the number is in range.
+     * @param commandWord The command word this index was typed for (e.g. "mark"), used only to
+     *      compose an example in the error message if arguments is empty.
+     * @return The 0-based index into the task list.
+     * @throws ChudException If arguments is empty, not a number, or out of range.
      */
-    public static int parseTaskIndex(String arguments, int taskCount, String commandWord) throws ChudException {
+    public static int parseTaskIndex(String arguments, int taskCount, String commandWord)
+            throws ChudException {
         if (arguments.isEmpty()) {
             throw new ChudException("Tell me which task number, e.g. " + commandWord + " 2");
         }
@@ -91,7 +98,11 @@ public class Parser {
         return taskNumber - 1;
     }
 
-    /** Validates a todo's arguments and returns its description. */
+    /**
+     * Validates a todo's arguments and returns its description.
+     *
+     * @throws ChudException If arguments is empty.
+     */
     public static String parseTodoDescription(String arguments) throws ChudException {
         if (arguments.isEmpty()) {
             throw new ChudException("The description of a todo cannot be empty. Try: todo borrow book");
@@ -110,7 +121,12 @@ public class Parser {
         }
     }
 
-    /** Parses a deadline's arguments (description and {@code /by} date/time). */
+    /**
+     * Parses a deadline's arguments (description and {@code /by} date/time).
+     *
+     * @throws ChudException If the {@code /by} marker is missing, the description or {@code /by}
+     *      value is empty, or the {@code /by} value isn't a date/time in a recognized format.
+     */
     public static DeadlineArgs parseDeadlineArgs(String arguments) throws ChudException {
         int byIndex = arguments.indexOf("/by ");
         if (byIndex == -1) {
@@ -147,7 +163,13 @@ public class Parser {
         }
     }
 
-    /** Parses an event's arguments (description and {@code /from}/{@code /to} date/times). */
+    /**
+     * Parses an event's arguments (description and {@code /from}/{@code /to} date/times).
+     *
+     * @throws ChudException If the {@code /from}/{@code /to} markers are missing or out of
+     *      order, the description or a date/time value is empty, or a date/time value isn't in
+     *      a recognized format.
+     */
     public static EventArgs parseEventArgs(String arguments) throws ChudException {
         int fromIndex = arguments.indexOf("/from ");
         int toIndex = arguments.indexOf("/to ");
@@ -174,7 +196,11 @@ public class Parser {
         }
     }
 
-    /** Parses the date typed after {@code on} into the date/time to filter tasks by. */
+    /**
+     * Parses the date typed after {@code on} into the date/time to filter tasks by.
+     *
+     * @throws ChudException If arguments is empty, or isn't a date/time in a recognized format.
+     */
     public static TaskDateTime parseOnDate(String arguments) throws ChudException {
         if (arguments.isEmpty()) {
             throw new ChudException("Tell me which date, e.g. on 2019-10-15");

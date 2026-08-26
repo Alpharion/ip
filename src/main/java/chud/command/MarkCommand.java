@@ -10,6 +10,7 @@ import chud.ui.Ui;
 public class MarkCommand extends Command {
     private final String arguments;
 
+    /** Creates a command that will mark the task at the raw (not yet validated) index text. */
     public MarkCommand(String arguments) {
         this.arguments = arguments;
     }

@@ -11,6 +11,7 @@ import chud.ui.Ui;
 public class AddDeadlineCommand extends Command {
     private final String arguments;
 
+    /** Creates a command that will parse and add a deadline from the given raw argument text. */
     public AddDeadlineCommand(String arguments) {
         this.arguments = arguments;
     }

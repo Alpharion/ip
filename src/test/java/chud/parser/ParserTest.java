@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Test;
+
 import chud.command.AddDeadlineCommand;
 import chud.command.AddEventCommand;
 import chud.command.AddTodoCommand;
@@ -18,8 +20,6 @@ import chud.command.OnCommand;
 import chud.command.UnknownCommand;
 import chud.command.UnmarkCommand;
 import chud.exception.ChudException;
-
-import org.junit.jupiter.api.Test;
 
 class ParserTest {
     // ---- parseCommandWord / parseArguments ----

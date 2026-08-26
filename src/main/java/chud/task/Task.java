@@ -2,10 +2,16 @@ package chud.task;
 
 import java.time.LocalDate;
 
+/**
+ * A single task the chatbot is tracking: a description and a done/not-done status, shared by
+ * every task type ({@link Todo}, {@link Deadline}, {@link Event}). Subclasses add their own
+ * date/time fields and extend the display and save-file formats accordingly.
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /** Creates a new, not-yet-done task with the given description. */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -15,14 +21,17 @@ public abstract class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    /** Marks this task as done. */
     public void markAsDone() {
         isDone = true;
     }
 
+    /** Marks this task as not done. */
     public void markAsNotDone() {
         isDone = false;
     }
 
+    /** Returns this task's type, used for its display tag (e.g. "T") and save-file tag. */
     public abstract TaskType getTaskType();
 
     /**

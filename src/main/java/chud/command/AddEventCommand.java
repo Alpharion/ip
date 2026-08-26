@@ -11,6 +11,7 @@ import chud.ui.Ui;
 public class AddEventCommand extends Command {
     private final String arguments;
 
+    /** Creates a command that will parse and add an event from the given raw argument text. */
     public AddEventCommand(String arguments) {
         this.arguments = arguments;
     }

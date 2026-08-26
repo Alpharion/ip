@@ -1,5 +1,7 @@
 package chud.command;
 
+import java.time.LocalDate;
+
 import chud.exception.ChudException;
 import chud.parser.Parser;
 import chud.storage.Storage;
@@ -8,12 +10,11 @@ import chud.task.TaskDateTime;
 import chud.task.TaskList;
 import chud.ui.Ui;
 
-import java.time.LocalDate;
-
 /** Lists the deadlines/events occurring on a given (not yet validated) date/time text. */
 public class OnCommand extends Command {
     private final String arguments;
 
+    /** Creates a command that will list tasks occurring on the raw (not yet validated) date text. */
     public OnCommand(String arguments) {
         this.arguments = arguments;
     }

@@ -7,7 +7,17 @@ import chud.storage.Storage;
 import chud.task.TaskList;
 import chud.ui.Ui;
 
+/**
+ * Entry point for the Chud chatbot. Wires together {@link Ui}, {@link Storage}, and
+ * {@link TaskList}, then repeatedly reads a command, parses it via {@link Parser}, and executes
+ * it, until an exit command (i.e. {@code bye}) ends the loop.
+ */
 public class Chud {
+    /**
+     * Starts the chatbot, reading commands from standard input until the user exits.
+     *
+     * @param args Not used.
+     */
     public static void main(String[] args) {
         Ui ui = new Ui();
         Storage storage = new Storage("data/chud.txt");

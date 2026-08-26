@@ -28,7 +28,8 @@ public class TaskDateTime {
             DateTimeFormatter.ofPattern("d/M/uuuu").withResolverStyle(ResolverStyle.STRICT),
     };
     private static final DateTimeFormatter DISPLAY_DATE_ONLY = DateTimeFormatter.ofPattern("MMM dd yyyy");
-    private static final DateTimeFormatter DISPLAY_DATE_TIME = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma");
+    private static final DateTimeFormatter DISPLAY_DATE_TIME =
+            DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma");
     private static final DateTimeFormatter STORAGE_DATE_ONLY = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter STORAGE_DATE_TIME = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
@@ -74,11 +75,15 @@ public class TaskDateTime {
 
     /** Encodes this date/time for the plain-text save file, in a form {@link #parse} understands. */
     public String toStorageString() {
-        return time == null ? date.format(STORAGE_DATE_ONLY) : LocalDateTime.of(date, time).format(STORAGE_DATE_TIME);
+        return time == null
+                ? date.format(STORAGE_DATE_ONLY)
+                : LocalDateTime.of(date, time).format(STORAGE_DATE_TIME);
     }
 
     @Override
     public String toString() {
-        return time == null ? date.format(DISPLAY_DATE_ONLY) : LocalDateTime.of(date, time).format(DISPLAY_DATE_TIME);
+        return time == null
+                ? date.format(DISPLAY_DATE_ONLY)
+                : LocalDateTime.of(date, time).format(DISPLAY_DATE_TIME);
     }
 }
