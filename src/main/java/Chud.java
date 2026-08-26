@@ -16,7 +16,7 @@ public class Chud {
             String arguments = Parser.parseArguments(input);
 
             try {
-                switch (Command.fromCommandWord(commandWord)) {
+                switch (CommandWord.fromCommandWord(commandWord)) {
                 case LIST:
                     ui.showMessage("Here are the tasks in your list:");
                     for (int i = 0; i < tasks.size(); i++) {
