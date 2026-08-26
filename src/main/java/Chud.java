@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Chud {
     public static void main(String[] args) {
@@ -7,7 +6,7 @@ public class Chud {
         ui.showWelcome();
 
         Storage storage = new Storage();
-        ArrayList<Task> tasks = storage.load();
+        TaskList tasks = new TaskList(storage.load());
 
         String input = ui.readCommand();
         while (!input.equals("bye")) {

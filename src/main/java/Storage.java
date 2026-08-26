@@ -21,7 +21,7 @@ public class Storage {
      * Creates the parent {@code data} directory first if it doesn't already exist (e.g. on
      * someone else's computer running the program for the first time).
      */
-    public void save(ArrayList<Task> tasks) {
+    public void save(TaskList tasks) {
         try {
             Files.createDirectories(FILE_PATH.getParent());
             try (FileWriter writer = new FileWriter(FILE_PATH.toFile())) {
