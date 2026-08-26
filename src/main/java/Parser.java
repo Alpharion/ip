@@ -21,6 +21,40 @@ public class Parser {
     }
 
     /**
+     * Parses a full raw input line into the Command it represents, ready to execute. An
+     * unrecognized command word yields an UnknownCommand rather than failing here, so the
+     * "I don't know what '...' means" message is reported the same way as any other command's
+     * execution failure, via ChudException from Command.execute.
+     */
+    public static Command parse(String input) {
+        String commandWord = parseCommandWord(input);
+        String arguments = parseArguments(input);
+        switch (CommandWord.fromCommandWord(commandWord)) {
+        case LIST:
+            return new ListCommand();
+        case MARK:
+            return new MarkCommand(arguments);
+        case UNMARK:
+            return new UnmarkCommand(arguments);
+        case DELETE:
+            return new DeleteCommand(arguments);
+        case TODO:
+            return new AddTodoCommand(arguments);
+        case DEADLINE:
+            return new AddDeadlineCommand(arguments);
+        case EVENT:
+            return new AddEventCommand(arguments);
+        case ON:
+            return new OnCommand(arguments);
+        case BYE:
+            return new ExitCommand();
+        case UNKNOWN:
+        default:
+            return new UnknownCommand(commandWord);
+        }
+    }
+
+    /**
      * Parses a 1-based task number typed by the user and returns the matching 0-based list index,
      * throwing a ChudException with a specific explanation for every way the input can be invalid.
      */

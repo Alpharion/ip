@@ -28,13 +28,6 @@ public class Ui {
         System.out.println(HORIZONTAL_LINE);
     }
 
-    /** Prints the farewell message, framed by horizontal lines. */
-    public void showGoodbye() {
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println("     Bye. Hope to see you again soon!");
-        System.out.println(HORIZONTAL_LINE);
-    }
-
     /** Prints one line of output at the standard message indent, e.g. "     Here are ...". */
     public void showMessage(Object content) {
         System.out.println("     " + content);

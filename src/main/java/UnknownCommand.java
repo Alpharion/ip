@@ -1,0 +1,14 @@
+/** Reports that the typed command word wasn't recognized. */
+public class UnknownCommand extends Command {
+    private final String commandWord;
+
+    public UnknownCommand(String commandWord) {
+        this.commandWord = commandWord;
+    }
+
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws ChudException {
+        throw new ChudException("I don't know what '" + commandWord + "' means. "
+                + "Try list, todo, deadline, event, on, mark, unmark, delete, or bye.");
+    }
+}

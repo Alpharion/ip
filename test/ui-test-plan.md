@@ -793,3 +793,38 @@ bye
      Bye. Hope to see you again soon!
     ____________________________________________________________
 ```
+
+## Test Case: Bye with trailing arguments
+
+**Aim:** `bye` exits regardless of trailing text after it, since command dispatch is by command word alone (like every other command) rather than an exact match on the whole line.
+
+**Input:**
+```
+todo test task
+bye now please
+```
+
+**Expected Output:**
+```
+    ____________________________________________________________
+  ____ _               _ 
+ / ___| |__  _   _  __| |
+| |   | '_ \| | | |/ _` |
+| |___| | | | |_| | (_| |
+ \____|_| |_|\__,_|\__,_|
+     Hello! I'm Chud.
+     What can I do for you?
+    ____________________________________________________________
+
+todo test task
+    ____________________________________________________________
+     Got it. I've added this task:
+       [T][ ] test task
+     Now you have 1 tasks in the list.
+    ____________________________________________________________
+
+bye now please
+    ____________________________________________________________
+     Bye. Hope to see you again soon!
+    ____________________________________________________________
+```
