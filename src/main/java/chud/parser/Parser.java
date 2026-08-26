@@ -6,6 +6,7 @@ import chud.command.AddTodoCommand;
 import chud.command.Command;
 import chud.command.DeleteCommand;
 import chud.command.ExitCommand;
+import chud.command.FindCommand;
 import chud.command.ListCommand;
 import chud.command.MarkCommand;
 import chud.command.OnCommand;
@@ -62,6 +63,8 @@ public class Parser {
             return new AddEventCommand(arguments);
         case ON:
             return new OnCommand(arguments);
+        case FIND:
+            return new FindCommand(arguments);
         case BYE:
             return new ExitCommand();
         case UNKNOWN:
@@ -184,5 +187,13 @@ public class Parser {
         } catch (IllegalArgumentException e) {
             throw new ChudException(e.getMessage());
         }
+    }
+
+    /** Validates a find command's arguments and returns the keyword to search for. */
+    public static String parseFindKeyword(String arguments) throws ChudException {
+        if (arguments.isEmpty()) {
+            throw new ChudException("Tell me what keyword to search for, e.g. find book");
+        }
+        return arguments;
     }
 }

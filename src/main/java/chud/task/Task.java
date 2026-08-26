@@ -34,6 +34,15 @@ public abstract class Task {
     }
 
     /**
+     * Returns true if this task's description contains the given keyword, for the {@code find}
+     * command. The match is case-insensitive and looks only at the description, not the date/
+     * time fields a Deadline or Event may have.
+     */
+    public boolean matchesKeyword(String keyword) {
+        return description.toLowerCase().contains(keyword.toLowerCase());
+    }
+
+    /**
      * Encodes this task as a single line for storage in the save file, e.g.
      * {@code "T | 1 | read book"}. Subclasses append their own extra fields.
      */

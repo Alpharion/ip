@@ -83,6 +83,19 @@ Example: `on 2019-12-02`
      1.[E][ ] project meeting (from: Dec 02 2019, 2:00PM to: Dec 02 2019, 4:00PM)
 ```
 
+## Finding tasks by keyword: `find`
+
+Shows only the tasks whose description contains the given keyword. The match is
+case-insensitive and looks only at the description, not dates/times or task type.
+
+Example: `find book`
+
+```
+     Here are the matching tasks in your list:
+     1.[T][X] read book
+     2.[D][X] return book (by: Jun 06 2019)
+```
+
 ## Marking a task as done: `mark`
 
 Marks the task at the given list number (as shown by `list`) as done.
@@ -136,6 +149,7 @@ Chud checks every command and responds with a specific, correctable `OOPS!!!` me
 - A `deadline` missing its `/by`, or an `event` missing its `/from`/`/to` (or given out of order).
 - A `/by`, `/from`, `/to`, or `on` date/time that isn't in one of the accepted formats.
 - A `mark`, `unmark`, or `delete` with a missing, non-numeric, or out-of-range task number.
+- A `find` with an empty keyword.
 
 ## Command summary
 
@@ -146,6 +160,7 @@ Chud checks every command and responds with a specific, correctable `OOPS!!!` me
 | Add an event | `event DESCRIPTION /from DATE[ TIME] /to DATE[ TIME]` | `event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600` |
 | List all tasks | `list` | `list` |
 | List tasks on a date | `on DATE` | `on 2019-12-02` |
+| Find tasks by keyword | `find KEYWORD` | `find book` |
 | Mark a task done | `mark INDEX` | `mark 1` |
 | Mark a task not done | `unmark INDEX` | `unmark 1` |
 | Delete a task | `delete INDEX` | `delete 2` |

@@ -16,6 +16,6 @@ public class UnknownCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ChudException {
         throw new ChudException("I don't know what '" + commandWord + "' means. "
-                + "Try list, todo, deadline, event, on, mark, unmark, delete, or bye.");
+                + "Try list, todo, deadline, event, on, find, mark, unmark, delete, or bye.");
     }
 }

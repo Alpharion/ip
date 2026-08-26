@@ -13,6 +13,7 @@ public enum CommandWord {
     DEADLINE,
     EVENT,
     ON,
+    FIND,
     BYE,
     UNKNOWN;
 
