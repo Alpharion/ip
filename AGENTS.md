@@ -38,8 +38,11 @@ editing existing code; fix violations you touch or notice in the area you're wor
 ## Git
 
 Use lightweight tags unless the user requests an annotated tag.
-When proposing or creating a commit message, include enough detail to explain the rationale for the change.
 Do not commit or push unless explicitly asked.
+
+All commit messages (proposed or created) and branch names must follow the SE-EDU Git
+conventions — see the `seedu-git-standard` skill for the full checklist (subject line, body,
+branch naming).
 
 ## Testing after code changes
 
