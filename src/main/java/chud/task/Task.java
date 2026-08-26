@@ -17,6 +17,7 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /** Returns "X" if this task is done, or a blank space otherwise. */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }

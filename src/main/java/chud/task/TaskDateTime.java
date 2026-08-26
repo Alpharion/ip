@@ -69,6 +69,7 @@ public class TaskDateTime {
                 + "Try a format like 2019-10-15, 2019-10-15 1800, 2/12/2019, or 2/12/2019 1800.");
     }
 
+    /** Returns the calendar date, ignoring any time of day. */
     public LocalDate getDate() {
         return date;
     }
