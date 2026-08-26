@@ -5,7 +5,7 @@ public class Chud {
         Ui ui = new Ui();
         ui.showWelcome();
 
-        Storage storage = new Storage();
+        Storage storage = new Storage("data/chud.txt");
         TaskList tasks = new TaskList(storage.load());
 
         String input = ui.readCommand();

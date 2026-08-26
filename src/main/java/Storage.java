@@ -6,25 +6,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Saves and loads the task list from a fixed location on disk (a {@code data} folder inside
- * the project's working directory) so that data survives between runs of the chatbot.
- *
- * <p>The location is a relative path built from name segments via {@link Path#of}, rather than
- * a hardcoded absolute path or a string with a literal {@code '/'} or {@code '\'} separator, so
- * it resolves correctly regardless of which computer or operating system runs the program.
+ * Saves and loads the task list from a save file on disk, so that data survives between runs
+ * of the chatbot. The file's location is given by the caller (e.g. {@code Chud} passes
+ * {@code "data/chud.txt"}, a relative path so the program works regardless of which computer
+ * runs it) and resolved via {@link Path#of}, which handles either {@code '/'} or {@code '\'} as
+ * a separator, so it resolves correctly regardless of which operating system runs the program.
  */
 public class Storage {
-    private static final Path FILE_PATH = Path.of("data", "chud.txt");
+    private final Path filePath;
+
+    /** Creates a Storage that reads and writes the save file at the given path. */
+    public Storage(String filePath) {
+        this.filePath = Path.of(filePath);
+    }
 
     /**
      * Writes the given tasks to the save file, one per line, overwriting any previous contents.
-     * Creates the parent {@code data} directory first if it doesn't already exist (e.g. on
+     * Creates the save file's parent directory first if it doesn't already exist (e.g. on
      * someone else's computer running the program for the first time).
      */
     public void save(TaskList tasks) {
         try {
-            Files.createDirectories(FILE_PATH.getParent());
-            try (FileWriter writer = new FileWriter(FILE_PATH.toFile())) {
+            Files.createDirectories(filePath.getParent());
+            try (FileWriter writer = new FileWriter(filePath.toFile())) {
                 for (Task task : tasks) {
                     writer.write(task.toFileString() + System.lineSeparator());
                 }
@@ -36,19 +40,19 @@ public class Storage {
 
     /**
      * Reads the save file and reconstructs the task list from it. Returns an empty list if the
-     * save file (or its containing {@code data} folder) doesn't exist yet -- e.g. on first run,
-     * or when someone else runs this chatbot for the first time on their own computer -- rather
-     * than treating a missing file as an error. Blank lines are skipped silently; a line that
-     * can't be parsed (e.g. the file was hand-edited into a corrupted state) is skipped with a
-     * warning instead of crashing the whole program, and loading continues with the rest.
+     * save file (or its containing directory) doesn't exist yet -- e.g. on first run, or when
+     * someone else runs this chatbot for the first time on their own computer -- rather than
+     * treating a missing file as an error. Blank lines are skipped silently; a line that can't
+     * be parsed (e.g. the file was hand-edited into a corrupted state) is skipped with a warning
+     * instead of crashing the whole program, and loading continues with the rest.
      */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
-        if (!Files.exists(FILE_PATH)) {
+        if (!Files.exists(filePath)) {
             return tasks;
         }
         try {
-            List<String> lines = Files.readAllLines(FILE_PATH);
+            List<String> lines = Files.readAllLines(filePath);
             for (int i = 0; i < lines.size(); i++) {
                 String line = lines.get(i);
                 if (line.isBlank()) {
