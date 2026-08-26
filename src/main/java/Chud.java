@@ -1,29 +1,17 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Chud {
     public static void main(String[] args) {
-        String banner = "  ____ _               _ \n"
-                + " / ___| |__  _   _  __| |\n"
-                + "| |   | '_ \\| | | |/ _` |\n"
-                + "| |___| | | | |_| | (_| |\n"
-                + " \\____|_| |_|\\__,_|\\__,_|\n";
-        String horizontalLine = "    ____________________________________________________________";
-
-        System.out.println(horizontalLine);
-        System.out.print(banner);
-        System.out.println("     Hello! I'm Chud.");
-        System.out.println("     What can I do for you?");
-        System.out.println(horizontalLine);
+        Ui ui = new Ui();
+        ui.showWelcome();
 
         Storage storage = new Storage();
         ArrayList<Task> tasks = storage.load();
 
-        Scanner scanner = new Scanner(System.in);
-        String input = nextInputLine(scanner);
+        String input = ui.readCommand();
         while (!input.equals("bye")) {
-            System.out.println(horizontalLine);
+            ui.showLine();
 
             int spaceIndex = input.indexOf(' ');
             String commandWord = spaceIndex == -1 ? input : input.substring(0, spaceIndex);
@@ -32,34 +20,34 @@ public class Chud {
             try {
                 switch (Command.fromCommandWord(commandWord)) {
                 case LIST:
-                    System.out.println("     Here are the tasks in your list:");
+                    ui.showMessage("Here are the tasks in your list:");
                     for (int i = 0; i < tasks.size(); i++) {
-                        System.out.println("     " + (i + 1) + "." + tasks.get(i));
+                        ui.showMessage((i + 1) + "." + tasks.get(i));
                     }
                     break;
                 case MARK: {
                     int taskIndex = parseTaskIndex(arguments, tasks.size(), "mark");
                     tasks.get(taskIndex).markAsDone();
                     storage.save(tasks);
-                    System.out.println("     Nice! I've marked this task as done:");
-                    System.out.println("       " + tasks.get(taskIndex));
+                    ui.showMessage("Nice! I've marked this task as done:");
+                    ui.showIndentedMessage(tasks.get(taskIndex));
                     break;
                 }
                 case UNMARK: {
                     int taskIndex = parseTaskIndex(arguments, tasks.size(), "unmark");
                     tasks.get(taskIndex).markAsNotDone();
                     storage.save(tasks);
-                    System.out.println("     OK, I've marked this task as not done yet:");
-                    System.out.println("       " + tasks.get(taskIndex));
+                    ui.showMessage("OK, I've marked this task as not done yet:");
+                    ui.showIndentedMessage(tasks.get(taskIndex));
                     break;
                 }
                 case DELETE: {
                     int taskIndex = parseTaskIndex(arguments, tasks.size(), "delete");
                     Task removedTask = tasks.remove(taskIndex);
                     storage.save(tasks);
-                    System.out.println("     Noted. I've removed this task:");
-                    System.out.println("       " + removedTask);
-                    System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
+                    ui.showMessage("Noted. I've removed this task:");
+                    ui.showIndentedMessage(removedTask);
+                    ui.showMessage("Now you have " + tasks.size() + " tasks in the list.");
                     break;
                 }
                 case TODO: {
@@ -68,7 +56,7 @@ public class Chud {
                     }
                     tasks.add(new Todo(arguments));
                     storage.save(tasks);
-                    printTaskAdded(tasks.get(tasks.size() - 1), tasks.size());
+                    printTaskAdded(ui, tasks.get(tasks.size() - 1), tasks.size());
                     break;
                 }
                 case DEADLINE: {
@@ -95,7 +83,7 @@ public class Chud {
                     }
                     tasks.add(new Deadline(description, by));
                     storage.save(tasks);
-                    printTaskAdded(tasks.get(tasks.size() - 1), tasks.size());
+                    printTaskAdded(ui, tasks.get(tasks.size() - 1), tasks.size());
                     break;
                 }
                 case EVENT: {
@@ -127,7 +115,7 @@ public class Chud {
                     }
                     tasks.add(new Event(description, from, to));
                     storage.save(tasks);
-                    printTaskAdded(tasks.get(tasks.size() - 1), tasks.size());
+                    printTaskAdded(ui, tasks.get(tasks.size() - 1), tasks.size());
                     break;
                 }
                 case ON: {
@@ -141,12 +129,12 @@ public class Chud {
                         throw new ChudException(e.getMessage());
                     }
                     LocalDate date = queryDateTime.getDate();
-                    System.out.println("     Here are the tasks occurring on " + queryDateTime + ":");
+                    ui.showMessage("Here are the tasks occurring on " + queryDateTime + ":");
                     int count = 0;
                     for (Task task : tasks) {
                         if (task.occursOn(date)) {
                             count++;
-                            System.out.println("     " + count + "." + task);
+                            ui.showMessage(count + "." + task);
                         }
                     }
                     break;
@@ -158,32 +146,20 @@ public class Chud {
                             + "Try list, todo, deadline, event, on, mark, unmark, delete, or bye.");
                 }
             } catch (ChudException e) {
-                System.out.println("     OOPS!!! " + e.getMessage());
+                ui.showError(e.getMessage());
             }
 
-            System.out.println(horizontalLine);
-            input = nextInputLine(scanner);
+            ui.showLine();
+            input = ui.readCommand();
         }
 
-        System.out.println(horizontalLine);
-        System.out.println("     Bye. Hope to see you again soon!");
-        System.out.println(horizontalLine);
+        ui.showGoodbye();
     }
 
-    /**
-     * Reads the next line of input, trimmed of surrounding whitespace so that stray spaces
-     * (e.g. "bye " or "  list") don't stop commands from being recognized. If input has run out
-     * (e.g. piped input with no trailing "bye", or the user pressing Ctrl+D) this returns "bye"
-     * so the program exits gracefully instead of crashing with a NoSuchElementException.
-     */
-    private static String nextInputLine(Scanner scanner) {
-        return scanner.hasNextLine() ? scanner.nextLine().trim() : "bye";
-    }
-
-    private static void printTaskAdded(Task task, int taskCount) {
-        System.out.println("     Got it. I've added this task:");
-        System.out.println("       " + task);
-        System.out.println("     Now you have " + taskCount + " tasks in the list.");
+    private static void printTaskAdded(Ui ui, Task task, int taskCount) {
+        ui.showMessage("Got it. I've added this task:");
+        ui.showIndentedMessage(task);
+        ui.showMessage("Now you have " + taskCount + " tasks in the list.");
     }
 
     /**
