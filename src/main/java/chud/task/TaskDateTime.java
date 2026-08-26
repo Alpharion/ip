@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * A calendar date, optionally paired with a time of day, used for a deadline's {@code /by} and
@@ -13,13 +14,18 @@ import java.time.format.DateTimeParseException;
  * "Dec 02 2019, 6:00PM"), and can round-trip itself to/from the plain-text save file.
  */
 public class TaskDateTime {
+    // Parsed with STRICT resolution so a nonexistent calendar date (e.g. "2019-02-30") is
+    // rejected outright, rather than java.time's default SMART mode silently clamping it to
+    // the nearest valid date (Feb 28). The year is matched with 'u' (proleptic year) rather
+    // than 'y' (year-of-era): under STRICT, 'y' requires an era to resolve and fails parsing
+    // without one, while 'u' resolves unambiguously on its own.
     private static final DateTimeFormatter[] INPUT_DATE_TIME_FORMATS = {
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"),
-            DateTimeFormatter.ofPattern("d/M/yyyy HHmm"),
+            DateTimeFormatter.ofPattern("uuuu-MM-dd HHmm").withResolverStyle(ResolverStyle.STRICT),
+            DateTimeFormatter.ofPattern("d/M/uuuu HHmm").withResolverStyle(ResolverStyle.STRICT),
     };
     private static final DateTimeFormatter[] INPUT_DATE_ONLY_FORMATS = {
-            DateTimeFormatter.ofPattern("yyyy-MM-dd"),
-            DateTimeFormatter.ofPattern("d/M/yyyy"),
+            DateTimeFormatter.ofPattern("uuuu-MM-dd").withResolverStyle(ResolverStyle.STRICT),
+            DateTimeFormatter.ofPattern("d/M/uuuu").withResolverStyle(ResolverStyle.STRICT),
     };
     private static final DateTimeFormatter DISPLAY_DATE_ONLY = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private static final DateTimeFormatter DISPLAY_DATE_TIME = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma");

@@ -42,3 +42,14 @@ After any code change that could affect the program's console behavior (new/chan
 2. Invoke the `test-ui` skill to run the full test plan and confirm the change didn't break anything.
 
 If `test-ui` reports a failure, treat it as a bug to investigate and fix (or, if the new behavior is intentional, update the affected test case's expected output) before considering the change done.
+
+## JUnit test coverage target
+
+Maintain JUnit test coverage across the top ~50% highest-value methods in the codebase — prioritize complex, core, or critical business logic (parsing, validation, date/time handling, data persistence, task-list operations) over trivial getters/setters and thin orchestration code (`Ui`, `Command.execute()` implementations, `Chud.main`), which are console-facing and already covered end-to-end by the `test-ui` suite instead.
+
+After any code change to a method in that top-value tier (new method, changed behavior, new edge case):
+
+1. Add or update the corresponding JUnit test(s) so the suite still reflects actual, correct behavior. Follow the existing file layout (`src/test/java/<package>/<Class>Test.java`, mirroring `src/main/java/<package>/<Class>.java`) and the `featureUnderTest_scenario_expectedBehavior()` naming convention used throughout the suite.
+2. Run `./gradlew test` to confirm the full suite still passes.
+
+If a test fails, treat it as a bug to investigate and fix (or, if the new behavior is intentional, update the affected test's expectations) before considering the change done. A JUnit test failure caused by a genuine defect in production code (not a stale expectation) should be fixed in the production code, not worked around in the test.
