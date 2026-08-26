@@ -21,18 +21,22 @@ public class TaskList implements Iterable<Task> {
         this.tasks = tasks;
     }
 
+    /** Appends the given task to the end of the list. */
     public void add(Task task) {
         tasks.add(task);
     }
 
+    /** Removes and returns the task at the given 0-based index. */
     public Task remove(int index) {
         return tasks.remove(index);
     }
 
+    /** Returns the task at the given 0-based index. */
     public Task get(int index) {
         return tasks.get(index);
     }
 
+    /** Returns the number of tasks in the list. */
     public int size() {
         return tasks.size();
     }

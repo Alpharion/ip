@@ -2,9 +2,11 @@ package chud.task;
 
 import java.time.LocalDate;
 
+/** A task with a description and a due date/time. */
 public class Deadline extends Task {
     protected TaskDateTime by;
 
+    /** Creates a new, not-yet-done deadline with the given description and due date/time. */
     public Deadline(String description, TaskDateTime by) {
         super(description);
         this.by = by;

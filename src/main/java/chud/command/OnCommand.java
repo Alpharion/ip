@@ -14,6 +14,7 @@ import java.time.LocalDate;
 public class OnCommand extends Command {
     private final String arguments;
 
+    /** Creates a command that will list tasks occurring on the raw (not yet validated) date text. */
     public OnCommand(String arguments) {
         this.arguments = arguments;
     }

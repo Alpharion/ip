@@ -11,6 +11,7 @@ import chud.ui.Ui;
 public class DeleteCommand extends Command {
     private final String arguments;
 
+    /** Creates a command that will delete the task at the raw (not yet validated) index text. */
     public DeleteCommand(String arguments) {
         this.arguments = arguments;
     }

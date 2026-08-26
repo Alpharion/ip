@@ -11,6 +11,7 @@ import chud.ui.Ui;
 public class AddTodoCommand extends Command {
     private final String arguments;
 
+    /** Creates a command that will validate and add a todo with the given raw description text. */
     public AddTodoCommand(String arguments) {
         this.arguments = arguments;
     }
