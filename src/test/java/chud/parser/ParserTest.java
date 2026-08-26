@@ -14,6 +14,7 @@ import chud.command.AddTodoCommand;
 import chud.command.Command;
 import chud.command.DeleteCommand;
 import chud.command.ExitCommand;
+import chud.command.FindCommand;
 import chud.command.ListCommand;
 import chud.command.MarkCommand;
 import chud.command.OnCommand;
@@ -193,6 +194,18 @@ class ParserTest {
         assertThrows(ChudException.class, () -> Parser.parseOnDate("not-a-date"));
     }
 
+    // ---- parseFindKeyword ----
+
+    @Test
+    void parseFindKeyword_nonEmpty_returnsArgumentsUnchanged() throws ChudException {
+        assertEquals("book", Parser.parseFindKeyword("book"));
+    }
+
+    @Test
+    void parseFindKeyword_empty_exceptionThrown() {
+        assertThrows(ChudException.class, () -> Parser.parseFindKeyword(""));
+    }
+
     // ---- parse (dispatch) ----
 
     @Test
@@ -206,6 +219,7 @@ class ParserTest {
         assertInstanceOf(AddEventCommand.class,
                 Parser.parse("event project meeting /from 2019-12-02 /to 2019-12-03"));
         assertInstanceOf(OnCommand.class, Parser.parse("on 2019-12-02"));
+        assertInstanceOf(FindCommand.class, Parser.parse("find book"));
         assertInstanceOf(ExitCommand.class, Parser.parse("bye"));
     }
 

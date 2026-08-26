@@ -240,7 +240,7 @@ bye
 
 frobnicate
     ____________________________________________________________
-     OOPS!!! I don't know what 'frobnicate' means. Try list, todo, deadline, event, on, mark, unmark, delete, or bye.
+     OOPS!!! I don't know what 'frobnicate' means. Try list, todo, deadline, event, on, find, mark, unmark, delete, or bye.
     ____________________________________________________________
 
 bye
@@ -824,6 +824,106 @@ todo test task
     ____________________________________________________________
 
 bye now please
+    ____________________________________________________________
+     Bye. Hope to see you again soon!
+    ____________________________________________________________
+```
+
+## Test Case: Find tasks by keyword
+
+**Aim:** `find <keyword>` lists only the tasks whose description contains the keyword (case-insensitively), across all task types; a keyword with no matches lists nothing, and an empty keyword is rejected with a specific error.
+
+**Input:**
+```
+todo read book
+deadline return book /by 2019-06-06
+todo do laundry
+mark 1
+mark 2
+find book
+find BOOK
+find laundry
+find nope
+find
+bye
+```
+
+**Expected Output:**
+```
+    ____________________________________________________________
+  ____ _               _ 
+ / ___| |__  _   _  __| |
+| |   | '_ \| | | |/ _` |
+| |___| | | | |_| | (_| |
+ \____|_| |_|\__,_|\__,_|
+     Hello! I'm Chud.
+     What can I do for you?
+    ____________________________________________________________
+
+todo read book
+    ____________________________________________________________
+     Got it. I've added this task:
+       [T][ ] read book
+     Now you have 1 tasks in the list.
+    ____________________________________________________________
+
+deadline return book /by 2019-06-06
+    ____________________________________________________________
+     Got it. I've added this task:
+       [D][ ] return book (by: Jun 06 2019)
+     Now you have 2 tasks in the list.
+    ____________________________________________________________
+
+todo do laundry
+    ____________________________________________________________
+     Got it. I've added this task:
+       [T][ ] do laundry
+     Now you have 3 tasks in the list.
+    ____________________________________________________________
+
+mark 1
+    ____________________________________________________________
+     Nice! I've marked this task as done:
+       [T][X] read book
+    ____________________________________________________________
+
+mark 2
+    ____________________________________________________________
+     Nice! I've marked this task as done:
+       [D][X] return book (by: Jun 06 2019)
+    ____________________________________________________________
+
+find book
+    ____________________________________________________________
+     Here are the matching tasks in your list:
+     1.[T][X] read book
+     2.[D][X] return book (by: Jun 06 2019)
+    ____________________________________________________________
+
+find BOOK
+    ____________________________________________________________
+     Here are the matching tasks in your list:
+     1.[T][X] read book
+     2.[D][X] return book (by: Jun 06 2019)
+    ____________________________________________________________
+
+find laundry
+    ____________________________________________________________
+     Here are the matching tasks in your list:
+     1.[T][ ] do laundry
+    ____________________________________________________________
+
+find nope
+    ____________________________________________________________
+     Here are the matching tasks in your list:
+    ____________________________________________________________
+
+find
+    ____________________________________________________________
+     OOPS!!! Tell me what keyword to search for, e.g. find book
+    ____________________________________________________________
+
+bye
     ____________________________________________________________
      Bye. Hope to see you again soon!
     ____________________________________________________________
