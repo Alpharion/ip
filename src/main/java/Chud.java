@@ -17,6 +17,7 @@ public class Chud {
         System.out.println(horizontalLine);
 
         ArrayList<Task> tasks = new ArrayList<>();
+        Storage storage = new Storage();
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
@@ -38,6 +39,7 @@ public class Chud {
                 case MARK: {
                     int taskIndex = parseTaskIndex(arguments, tasks.size(), "mark");
                     tasks.get(taskIndex).markAsDone();
+                    storage.save(tasks);
                     System.out.println("     Nice! I've marked this task as done:");
                     System.out.println("       " + tasks.get(taskIndex));
                     break;
@@ -45,6 +47,7 @@ public class Chud {
                 case UNMARK: {
                     int taskIndex = parseTaskIndex(arguments, tasks.size(), "unmark");
                     tasks.get(taskIndex).markAsNotDone();
+                    storage.save(tasks);
                     System.out.println("     OK, I've marked this task as not done yet:");
                     System.out.println("       " + tasks.get(taskIndex));
                     break;
@@ -52,6 +55,7 @@ public class Chud {
                 case DELETE: {
                     int taskIndex = parseTaskIndex(arguments, tasks.size(), "delete");
                     Task removedTask = tasks.remove(taskIndex);
+                    storage.save(tasks);
                     System.out.println("     Noted. I've removed this task:");
                     System.out.println("       " + removedTask);
                     System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
@@ -62,6 +66,7 @@ public class Chud {
                         throw new ChudException("The description of a todo cannot be empty. Try: todo borrow book");
                     }
                     tasks.add(new Todo(arguments));
+                    storage.save(tasks);
                     printTaskAdded(tasks.get(tasks.size() - 1), tasks.size());
                     break;
                 }
@@ -79,6 +84,7 @@ public class Chud {
                         throw new ChudException("The '/by' date/time of a deadline cannot be empty. Try: deadline return book /by Sunday");
                     }
                     tasks.add(new Deadline(description, by));
+                    storage.save(tasks);
                     printTaskAdded(tasks.get(tasks.size() - 1), tasks.size());
                     break;
                 }
@@ -102,6 +108,7 @@ public class Chud {
                                 + "Try: event project meeting /from Mon 2pm /to 4pm");
                     }
                     tasks.add(new Event(description, from, to));
+                    storage.save(tasks);
                     printTaskAdded(tasks.get(tasks.size() - 1), tasks.size());
                     break;
                 }

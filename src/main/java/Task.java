@@ -21,6 +21,14 @@ public abstract class Task {
 
     public abstract TaskType getTaskType();
 
+    /**
+     * Encodes this task as a single line for storage in the save file, e.g.
+     * {@code "T | 1 | read book"}. Subclasses append their own extra fields.
+     */
+    public String toFileString() {
+        return getTaskType().getTag() + " | " + (isDone ? "1" : "0") + " | " + description;
+    }
+
     @Override
     public String toString() {
         return "[" + getTaskType().getTag() + "][" + getStatusIcon() + "] " + description;
