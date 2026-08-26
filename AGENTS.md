@@ -28,6 +28,13 @@ Unless the user says otherwise, assume that you are assisting a student working 
 
 Ensure that Java 25 is used when running the application or build tasks. On macOS, use `sdk use java 25.0.3.fx-zulu` to switch to Java 25 if needed.
 
+## Java coding standard
+
+All Java code in this project (new or edited) must follow the SE-EDU intermediate Java coding
+standard — see the `seedu-java-coding-standard` skill for the full checklist (naming, layout,
+statements, comments/Javadoc). Apply it when writing code, and check against it when reviewing or
+editing existing code; fix violations you touch or notice in the area you're working in.
+
 ## Git
 
 Use lightweight tags unless the user requests an annotated tag.
