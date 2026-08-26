@@ -75,11 +75,11 @@ bye
 
 ## Test Case: Add a deadline
 
-**Aim:** A `deadline` command adds a task with a `/by` date/time, stored and displayed as free text.
+**Aim:** A `deadline` command adds a task with a `/by` date/time, parsed and stored as a real date (not just free text), and displayed in a friendly format.
 
 **Input:**
 ```
-deadline return book /by Sunday
+deadline return book /by 2/12/2019 1800
 bye
 ```
 
@@ -95,10 +95,10 @@ bye
      What can I do for you?
     ____________________________________________________________
 
-deadline return book /by Sunday
+deadline return book /by 2/12/2019 1800
     ____________________________________________________________
      Got it. I've added this task:
-       [D][ ] return book (by: Sunday)
+       [D][ ] return book (by: Dec 02 2019, 6:00PM)
      Now you have 1 tasks in the list.
     ____________________________________________________________
 
@@ -110,11 +110,11 @@ bye
 
 ## Test Case: Add an event
 
-**Aim:** An `event` command adds a task with `/from` and `/to` date/times, stored and displayed as free text.
+**Aim:** An `event` command adds a task with `/from` and `/to` date/times, parsed and stored as real dates, and displayed in a friendly format.
 
 **Input:**
 ```
-event project meeting /from Mon 2pm /to 4pm
+event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600
 bye
 ```
 
@@ -130,10 +130,10 @@ bye
      What can I do for you?
     ____________________________________________________________
 
-event project meeting /from Mon 2pm /to 4pm
+event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600
     ____________________________________________________________
      Got it. I've added this task:
-       [E][ ] project meeting (from: Mon 2pm to: 4pm)
+       [E][ ] project meeting (from: Dec 02 2019, 2:00PM to: Dec 02 2019, 4:00PM)
      Now you have 1 tasks in the list.
     ____________________________________________________________
 
@@ -240,7 +240,7 @@ bye
 
 frobnicate
     ____________________________________________________________
-     OOPS!!! I don't know what 'frobnicate' means. Try list, todo, deadline, event, mark, unmark, delete, or bye.
+     OOPS!!! I don't know what 'frobnicate' means. Try list, todo, deadline, event, on, mark, unmark, delete, or bye.
     ____________________________________________________________
 
 bye
@@ -284,14 +284,15 @@ bye
 
 ## Test Case: Deadline validation errors
 
-**Aim:** A `deadline` missing its `/by` marker, or with an empty description or empty `/by` value, is rejected with a specific, correctable error instead of crashing.
+**Aim:** A `deadline` missing its `/by` marker, with an empty description or empty `/by` value, or with a `/by` value that isn't a date/time in a recognized format, is rejected with a specific, correctable error instead of crashing.
 
 **Input:**
 ```
 deadline
 deadline submit report
-deadline /by Sunday
+deadline /by 2019-10-15
 deadline submit report /by
+deadline submit report /by not-a-date
 bye
 ```
 
@@ -309,22 +310,27 @@ bye
 
 deadline
     ____________________________________________________________
-     OOPS!!! A deadline needs a '/by' date/time. Try: deadline return book /by Sunday
+     OOPS!!! A deadline needs a '/by' date/time. Try: deadline return book /by 2019-10-15 1800
     ____________________________________________________________
 
 deadline submit report
     ____________________________________________________________
-     OOPS!!! A deadline needs a '/by' date/time. Try: deadline return book /by Sunday
+     OOPS!!! A deadline needs a '/by' date/time. Try: deadline return book /by 2019-10-15 1800
     ____________________________________________________________
 
-deadline /by Sunday
+deadline /by 2019-10-15
     ____________________________________________________________
-     OOPS!!! The description of a deadline cannot be empty. Try: deadline return book /by Sunday
+     OOPS!!! The description of a deadline cannot be empty. Try: deadline return book /by 2019-10-15 1800
     ____________________________________________________________
 
 deadline submit report /by
     ____________________________________________________________
-     OOPS!!! A deadline needs a '/by' date/time. Try: deadline return book /by Sunday
+     OOPS!!! A deadline needs a '/by' date/time. Try: deadline return book /by 2019-10-15 1800
+    ____________________________________________________________
+
+deadline submit report /by not-a-date
+    ____________________________________________________________
+     OOPS!!! 'not-a-date' isn't a date/time I understand. Try a format like 2019-10-15, 2019-10-15 1800, 2/12/2019, or 2/12/2019 1800.
     ____________________________________________________________
 
 bye
@@ -335,14 +341,15 @@ bye
 
 ## Test Case: Event validation errors
 
-**Aim:** An `event` missing its `/from`/`/to` markers, or with an empty description or empty `/from`/`/to` value, is rejected with a specific, correctable error instead of crashing.
+**Aim:** An `event` missing its `/from`/`/to` markers, with an empty description or empty `/from`/`/to` value, or with a `/from`/`/to` value that isn't a date/time in a recognized format, is rejected with a specific, correctable error instead of crashing.
 
 **Input:**
 ```
 event
-event meeting /from Mon
-event /from Mon /to 4pm
-event meeting /from /to 4pm
+event meeting /from 2019-10-15
+event /from 2019-10-15 /to 2019-10-16
+event meeting /from /to 2019-10-16
+event meeting /from not-a-date /to 2019-10-16
 bye
 ```
 
@@ -360,22 +367,27 @@ bye
 
 event
     ____________________________________________________________
-     OOPS!!! An event needs both '/from' and '/to' date/times, in that order. Try: event project meeting /from Mon 2pm /to 4pm
+     OOPS!!! An event needs both '/from' and '/to' date/times, in that order. Try: event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600
     ____________________________________________________________
 
-event meeting /from Mon
+event meeting /from 2019-10-15
     ____________________________________________________________
-     OOPS!!! An event needs both '/from' and '/to' date/times, in that order. Try: event project meeting /from Mon 2pm /to 4pm
-    ____________________________________________________________
-
-event /from Mon /to 4pm
-    ____________________________________________________________
-     OOPS!!! The description of an event cannot be empty. Try: event project meeting /from Mon 2pm /to 4pm
+     OOPS!!! An event needs both '/from' and '/to' date/times, in that order. Try: event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600
     ____________________________________________________________
 
-event meeting /from /to 4pm
+event /from 2019-10-15 /to 2019-10-16
     ____________________________________________________________
-     OOPS!!! The '/from' and '/to' date/times of an event cannot be empty. Try: event project meeting /from Mon 2pm /to 4pm
+     OOPS!!! The description of an event cannot be empty. Try: event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600
+    ____________________________________________________________
+
+event meeting /from /to 2019-10-16
+    ____________________________________________________________
+     OOPS!!! The '/from' and '/to' date/times of an event cannot be empty. Try: event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600
+    ____________________________________________________________
+
+event meeting /from not-a-date /to 2019-10-16
+    ____________________________________________________________
+     OOPS!!! 'not-a-date' isn't a date/time I understand. Try a format like 2019-10-15, 2019-10-15 1800, 2/12/2019, or 2/12/2019 1800.
     ____________________________________________________________
 
 bye
@@ -456,8 +468,8 @@ bye
 **Input:**
 ```
 todo read book
-deadline return book /by June 6th
-event project meeting /from Aug 6th 2pm /to 4pm
+deadline return book /by 2019-06-06
+event project meeting /from 2019-08-06 1400 /to 2019-08-06 1600
 todo join sports club
 todo borrow book
 mark 1
@@ -488,17 +500,17 @@ todo read book
      Now you have 1 tasks in the list.
     ____________________________________________________________
 
-deadline return book /by June 6th
+deadline return book /by 2019-06-06
     ____________________________________________________________
      Got it. I've added this task:
-       [D][ ] return book (by: June 6th)
+       [D][ ] return book (by: Jun 06 2019)
      Now you have 2 tasks in the list.
     ____________________________________________________________
 
-event project meeting /from Aug 6th 2pm /to 4pm
+event project meeting /from 2019-08-06 1400 /to 2019-08-06 1600
     ____________________________________________________________
      Got it. I've added this task:
-       [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+       [E][ ] project meeting (from: Aug 06 2019, 2:00PM to: Aug 06 2019, 4:00PM)
      Now you have 3 tasks in the list.
     ____________________________________________________________
 
@@ -525,7 +537,7 @@ mark 1
 mark 2
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [D][X] return book (by: June 6th)
+       [D][X] return book (by: Jun 06 2019)
     ____________________________________________________________
 
 mark 4
@@ -538,8 +550,8 @@ list
     ____________________________________________________________
      Here are the tasks in your list:
      1.[T][X] read book
-     2.[D][X] return book (by: June 6th)
-     3.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+     2.[D][X] return book (by: Jun 06 2019)
+     3.[E][ ] project meeting (from: Aug 06 2019, 2:00PM to: Aug 06 2019, 4:00PM)
      4.[T][X] join sports club
      5.[T][ ] borrow book
     ____________________________________________________________
@@ -547,7 +559,7 @@ list
 delete 3
     ____________________________________________________________
      Noted. I've removed this task:
-       [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+       [E][ ] project meeting (from: Aug 06 2019, 2:00PM to: Aug 06 2019, 4:00PM)
      Now you have 4 tasks in the list.
     ____________________________________________________________
 
@@ -555,7 +567,7 @@ list
     ____________________________________________________________
      Here are the tasks in your list:
      1.[T][X] read book
-     2.[D][X] return book (by: June 6th)
+     2.[D][X] return book (by: Jun 06 2019)
      3.[T][X] join sports club
      4.[T][ ] borrow book
     ____________________________________________________________
@@ -700,5 +712,84 @@ todo probe task
      Got it. I've added this task:
        [T][ ] probe task
      Now you have 1 tasks in the list.
+    ____________________________________________________________
+```
+
+## Test Case: List tasks on a date
+
+**Aim:** `on <date>` lists only the deadlines and events occurring on the given date (a deadline matches if its `/by` date matches; an event matches if the date falls within its `/from`-`/to` range), leaving out todos and tasks on other dates. An `on` with a missing or unparsable date is rejected with a specific error instead of crashing.
+
+**Input:**
+```
+todo pack bags
+deadline return book /by 2/12/2019 1800
+event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600
+deadline submit report /by 2019-10-15
+on 2019-12-02
+on
+on not-a-date
+bye
+```
+
+**Expected Output:**
+```
+    ____________________________________________________________
+  ____ _               _ 
+ / ___| |__  _   _  __| |
+| |   | '_ \| | | |/ _` |
+| |___| | | | |_| | (_| |
+ \____|_| |_|\__,_|\__,_|
+     Hello! I'm Chud.
+     What can I do for you?
+    ____________________________________________________________
+
+todo pack bags
+    ____________________________________________________________
+     Got it. I've added this task:
+       [T][ ] pack bags
+     Now you have 1 tasks in the list.
+    ____________________________________________________________
+
+deadline return book /by 2/12/2019 1800
+    ____________________________________________________________
+     Got it. I've added this task:
+       [D][ ] return book (by: Dec 02 2019, 6:00PM)
+     Now you have 2 tasks in the list.
+    ____________________________________________________________
+
+event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600
+    ____________________________________________________________
+     Got it. I've added this task:
+       [E][ ] project meeting (from: Dec 02 2019, 2:00PM to: Dec 02 2019, 4:00PM)
+     Now you have 3 tasks in the list.
+    ____________________________________________________________
+
+deadline submit report /by 2019-10-15
+    ____________________________________________________________
+     Got it. I've added this task:
+       [D][ ] submit report (by: Oct 15 2019)
+     Now you have 4 tasks in the list.
+    ____________________________________________________________
+
+on 2019-12-02
+    ____________________________________________________________
+     Here are the tasks occurring on Dec 02 2019:
+     1.[D][ ] return book (by: Dec 02 2019, 6:00PM)
+     2.[E][ ] project meeting (from: Dec 02 2019, 2:00PM to: Dec 02 2019, 4:00PM)
+    ____________________________________________________________
+
+on
+    ____________________________________________________________
+     OOPS!!! Tell me which date, e.g. on 2019-10-15
+    ____________________________________________________________
+
+on not-a-date
+    ____________________________________________________________
+     OOPS!!! 'not-a-date' isn't a date/time I understand. Try a format like 2019-10-15, 2019-10-15 1800, 2/12/2019, or 2/12/2019 1800.
+    ____________________________________________________________
+
+bye
+    ____________________________________________________________
+     Bye. Hope to see you again soon!
     ____________________________________________________________
 ```

@@ -93,13 +93,13 @@ public class Storage {
             if (fields.length < 4) {
                 throw new IllegalArgumentException("deadline is missing its '/by' field");
             }
-            task = new Deadline(description, fields[3]);
+            task = new Deadline(description, TaskDateTime.parse(fields[3]));
             break;
         case "E":
             if (fields.length < 5) {
                 throw new IllegalArgumentException("event is missing its '/from' or '/to' field");
             }
-            task = new Event(description, fields[3], fields[4]);
+            task = new Event(description, TaskDateTime.parse(fields[3]), TaskDateTime.parse(fields[4]));
             break;
         default:
             throw new IllegalArgumentException("unrecognized task type tag '" + tag + "'");

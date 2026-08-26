@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -20,6 +22,14 @@ public abstract class Task {
     }
 
     public abstract TaskType getTaskType();
+
+    /**
+     * Returns true if this task is scheduled to occur on the given date, for the {@code on}
+     * command. A plain Todo has no date, so the default implementation returns false.
+     */
+    public boolean occursOn(LocalDate date) {
+        return false;
+    }
 
     /**
      * Encodes this task as a single line for storage in the save file, e.g.

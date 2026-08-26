@@ -1,7 +1,9 @@
-public class Deadline extends Task {
-    protected String by;
+import java.time.LocalDate;
 
-    public Deadline(String description, String by) {
+public class Deadline extends Task {
+    protected TaskDateTime by;
+
+    public Deadline(String description, TaskDateTime by) {
         super(description);
         this.by = by;
     }
@@ -12,12 +14,17 @@ public class Deadline extends Task {
     }
 
     @Override
+    public boolean occursOn(LocalDate date) {
+        return by.getDate().equals(date);
+    }
+
+    @Override
     public String toString() {
         return super.toString() + " (by: " + by + ")";
     }
 
     @Override
     public String toFileString() {
-        return super.toFileString() + " | " + by;
+        return super.toFileString() + " | " + by.toStorageString();
     }
 }

@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -73,15 +74,24 @@ public class Chud {
                 case DEADLINE: {
                     int byIndex = arguments.indexOf("/by ");
                     if (byIndex == -1) {
-                        throw new ChudException("A deadline needs a '/by' date/time. Try: deadline return book /by Sunday");
+                        throw new ChudException("A deadline needs a '/by' date/time. "
+                                + "Try: deadline return book /by 2019-10-15 1800");
                     }
                     String description = arguments.substring(0, byIndex).trim();
-                    String by = arguments.substring(byIndex + 4).trim();
+                    String byText = arguments.substring(byIndex + 4).trim();
                     if (description.isEmpty()) {
-                        throw new ChudException("The description of a deadline cannot be empty. Try: deadline return book /by Sunday");
+                        throw new ChudException("The description of a deadline cannot be empty. "
+                                + "Try: deadline return book /by 2019-10-15 1800");
                     }
-                    if (by.isEmpty()) {
-                        throw new ChudException("The '/by' date/time of a deadline cannot be empty. Try: deadline return book /by Sunday");
+                    if (byText.isEmpty()) {
+                        throw new ChudException("The '/by' date/time of a deadline cannot be empty. "
+                                + "Try: deadline return book /by 2019-10-15 1800");
+                    }
+                    TaskDateTime by;
+                    try {
+                        by = TaskDateTime.parse(byText);
+                    } catch (IllegalArgumentException e) {
+                        throw new ChudException(e.getMessage());
                     }
                     tasks.add(new Deadline(description, by));
                     storage.save(tasks);
@@ -94,29 +104,58 @@ public class Chud {
                     if (fromIndex == -1 || toIndex == -1 || toIndex < fromIndex) {
                         throw new ChudException(
                                 "An event needs both '/from' and '/to' date/times, in that order. "
-                                        + "Try: event project meeting /from Mon 2pm /to 4pm");
+                                        + "Try: event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600");
                     }
                     String description = arguments.substring(0, fromIndex).trim();
-                    String from = arguments.substring(fromIndex + 6, toIndex).trim();
-                    String to = arguments.substring(toIndex + 4).trim();
+                    String fromText = arguments.substring(fromIndex + 6, toIndex).trim();
+                    String toText = arguments.substring(toIndex + 4).trim();
                     if (description.isEmpty()) {
                         throw new ChudException("The description of an event cannot be empty. "
-                                + "Try: event project meeting /from Mon 2pm /to 4pm");
+                                + "Try: event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600");
                     }
-                    if (from.isEmpty() || to.isEmpty()) {
+                    if (fromText.isEmpty() || toText.isEmpty()) {
                         throw new ChudException("The '/from' and '/to' date/times of an event cannot be empty. "
-                                + "Try: event project meeting /from Mon 2pm /to 4pm");
+                                + "Try: event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600");
+                    }
+                    TaskDateTime from;
+                    TaskDateTime to;
+                    try {
+                        from = TaskDateTime.parse(fromText);
+                        to = TaskDateTime.parse(toText);
+                    } catch (IllegalArgumentException e) {
+                        throw new ChudException(e.getMessage());
                     }
                     tasks.add(new Event(description, from, to));
                     storage.save(tasks);
                     printTaskAdded(tasks.get(tasks.size() - 1), tasks.size());
                     break;
                 }
+                case ON: {
+                    if (arguments.isEmpty()) {
+                        throw new ChudException("Tell me which date, e.g. on 2019-10-15");
+                    }
+                    TaskDateTime queryDateTime;
+                    try {
+                        queryDateTime = TaskDateTime.parse(arguments);
+                    } catch (IllegalArgumentException e) {
+                        throw new ChudException(e.getMessage());
+                    }
+                    LocalDate date = queryDateTime.getDate();
+                    System.out.println("     Here are the tasks occurring on " + queryDateTime + ":");
+                    int count = 0;
+                    for (Task task : tasks) {
+                        if (task.occursOn(date)) {
+                            count++;
+                            System.out.println("     " + count + "." + task);
+                        }
+                    }
+                    break;
+                }
                 case BYE:
                 case UNKNOWN:
                 default:
                     throw new ChudException("I don't know what '" + commandWord + "' means. "
-                            + "Try list, todo, deadline, event, mark, unmark, delete, or bye.");
+                            + "Try list, todo, deadline, event, on, mark, unmark, delete, or bye.");
                 }
             } catch (ChudException e) {
                 System.out.println("     OOPS!!! " + e.getMessage());

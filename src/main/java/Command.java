@@ -10,6 +10,7 @@ public enum Command {
     TODO,
     DEADLINE,
     EVENT,
+    ON,
     BYE,
     UNKNOWN;
 
