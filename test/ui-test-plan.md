@@ -631,3 +631,74 @@ bye
      Bye. Hope to see you again soon!
     ____________________________________________________________
 ```
+
+## Test Case: Whitespace-padded commands
+
+**Aim:** Leading/trailing whitespace around a typed command (including `bye`) is trimmed before matching, so padded input behaves the same as the unpadded command instead of being rejected as unrecognized.
+
+**Input:**
+```
+  todo   pad book  
+list  
+bye  
+```
+
+**Expected Output:**
+```
+    ____________________________________________________________
+  ____ _               _ 
+ / ___| |__  _   _  __| |
+| |   | '_ \| | | |/ _` |
+| |___| | | | |_| | (_| |
+ \____|_| |_|\__,_|\__,_|
+     Hello! I'm Chud.
+     What can I do for you?
+    ____________________________________________________________
+
+  todo   pad book  
+    ____________________________________________________________
+     Got it. I've added this task:
+       [T][ ] pad book
+     Now you have 1 tasks in the list.
+    ____________________________________________________________
+
+list  
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[T][ ] pad book
+    ____________________________________________________________
+
+bye  
+    ____________________________________________________________
+     Bye. Hope to see you again soon!
+    ____________________________________________________________
+```
+
+## Test Case: EOF probe
+
+**Aim:** If input ends without an explicit `bye` (e.g. piped input with no trailing command, or the user pressing Ctrl+D), the program exits gracefully via EOF detection instead of crashing with a `NoSuchElementException` or hanging forever. (The runner enforces this indirectly: if the program hung, this run would time out and fail the whole test session rather than merely mismatching one test case.)
+
+**Input:**
+```
+todo probe task
+```
+
+**Expected Output:**
+```
+    ____________________________________________________________
+  ____ _               _ 
+ / ___| |__  _   _  __| |
+| |   | '_ \| | | |/ _` |
+| |___| | | | |_| | (_| |
+ \____|_| |_|\__,_|\__,_|
+     Hello! I'm Chud.
+     What can I do for you?
+    ____________________________________________________________
+
+todo probe task
+    ____________________________________________________________
+     Got it. I've added this task:
+       [T][ ] probe task
+     Now you have 1 tasks in the list.
+    ____________________________________________________________
+```

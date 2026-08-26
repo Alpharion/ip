@@ -20,7 +20,7 @@ public class Chud {
         ArrayList<Task> tasks = storage.load();
 
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
+        String input = nextInputLine(scanner);
         while (!input.equals("bye")) {
             System.out.println(horizontalLine);
 
@@ -123,12 +123,22 @@ public class Chud {
             }
 
             System.out.println(horizontalLine);
-            input = scanner.nextLine();
+            input = nextInputLine(scanner);
         }
 
         System.out.println(horizontalLine);
         System.out.println("     Bye. Hope to see you again soon!");
         System.out.println(horizontalLine);
+    }
+
+    /**
+     * Reads the next line of input, trimmed of surrounding whitespace so that stray spaces
+     * (e.g. "bye " or "  list") don't stop commands from being recognized. If input has run out
+     * (e.g. piped input with no trailing "bye", or the user pressing Ctrl+D) this returns "bye"
+     * so the program exits gracefully instead of crashing with a NoSuchElementException.
+     */
+    private static String nextInputLine(Scanner scanner) {
+        return scanner.hasNextLine() ? scanner.nextLine().trim() : "bye";
     }
 
     private static void printTaskAdded(Task task, int taskCount) {
