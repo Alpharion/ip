@@ -1,3 +1,5 @@
+package chud.task;
+
 import java.time.LocalDate;
 
 public abstract class Task {

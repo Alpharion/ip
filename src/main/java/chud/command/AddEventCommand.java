@@ -1,3 +1,12 @@
+package chud.command;
+
+import chud.exception.ChudException;
+import chud.parser.Parser;
+import chud.storage.Storage;
+import chud.task.Event;
+import chud.task.TaskList;
+import chud.ui.Ui;
+
 /** Adds an Event task with the given (not yet validated) "description /from ... /to ..." text. */
 public class AddEventCommand extends Command {
     private final String arguments;

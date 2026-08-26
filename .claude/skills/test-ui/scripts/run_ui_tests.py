@@ -124,7 +124,7 @@ def parse_test_plan(plan_path: Path):
 def compile_program(repo_root: Path, source_dir: str, build_dir: Path) -> Path:
     classes_dir = build_dir / "classes"
     classes_dir.mkdir(parents=True, exist_ok=True)
-    sources = sorted((repo_root / source_dir).glob("*.java"))
+    sources = sorted((repo_root / source_dir).glob("**/*.java"))
     if not sources:
         raise ValueError(f"no .java files found in {source_dir}")
 

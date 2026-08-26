@@ -1,3 +1,12 @@
+package chud;
+
+import chud.command.Command;
+import chud.exception.ChudException;
+import chud.parser.Parser;
+import chud.storage.Storage;
+import chud.task.TaskList;
+import chud.ui.Ui;
+
 public class Chud {
     public static void main(String[] args) {
         Ui ui = new Ui();

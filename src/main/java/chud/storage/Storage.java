@@ -1,3 +1,12 @@
+package chud.storage;
+
+import chud.task.Deadline;
+import chud.task.Event;
+import chud.task.Task;
+import chud.task.TaskDateTime;
+import chud.task.TaskList;
+import chud.task.Todo;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;

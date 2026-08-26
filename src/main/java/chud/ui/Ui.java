@@ -1,3 +1,5 @@
+package chud.ui;
+
 import java.util.Scanner;
 
 /**

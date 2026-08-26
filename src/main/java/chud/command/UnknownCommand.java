@@ -1,3 +1,10 @@
+package chud.command;
+
+import chud.exception.ChudException;
+import chud.storage.Storage;
+import chud.task.TaskList;
+import chud.ui.Ui;
+
 /** Reports that the typed command word wasn't recognized. */
 public class UnknownCommand extends Command {
     private final String commandWord;

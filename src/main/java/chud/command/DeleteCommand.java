@@ -1,3 +1,12 @@
+package chud.command;
+
+import chud.exception.ChudException;
+import chud.parser.Parser;
+import chud.storage.Storage;
+import chud.task.Task;
+import chud.task.TaskList;
+import chud.ui.Ui;
+
 /** Removes the task at a given 1-based list number from the task list. */
 public class DeleteCommand extends Command {
     private final String arguments;

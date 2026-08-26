@@ -1,3 +1,5 @@
+package chud.task;
+
 /**
  * The kind of a task, and the single-letter tag used to display it (e.g. "[T]").
  */

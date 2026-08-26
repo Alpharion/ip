@@ -9,7 +9,7 @@ captured in one run.
 ## Setup
 
 - **Source directory:** `src/main/java`
-- **Main class:** `Chud`
+- **Main class:** `chud.Chud`
 
 ## Test Case: Greet and exit
 

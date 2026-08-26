@@ -1,3 +1,12 @@
+package chud.command;
+
+import chud.exception.ChudException;
+import chud.parser.Parser;
+import chud.storage.Storage;
+import chud.task.Deadline;
+import chud.task.TaskList;
+import chud.ui.Ui;
+
 /** Adds a Deadline task with the given (not yet validated) "description /by ..." text. */
 public class AddDeadlineCommand extends Command {
     private final String arguments;

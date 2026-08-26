@@ -1,3 +1,5 @@
+package chud.parser;
+
 /**
  * The set of command words the chatbot understands. UNKNOWN represents any
  * other word the user might type.

@@ -1,3 +1,11 @@
+package chud.command;
+
+import chud.exception.ChudException;
+import chud.storage.Storage;
+import chud.task.Task;
+import chud.task.TaskList;
+import chud.ui.Ui;
+
 /**
  * A single user command, already parsed and ready to run against the task list. Each concrete
  * Command knows how to execute itself -- mutating the task list, saving to disk via Storage,
