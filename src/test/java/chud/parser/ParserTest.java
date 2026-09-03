@@ -55,8 +55,8 @@ class ParserTest {
 
     @Test
     void parseTaskIndex_emptyArguments_exceptionThrown() {
-        ChudException exception = assertThrows(ChudException.class,
-                () -> Parser.parseTaskIndex("", 3, "mark"));
+        ChudException exception = assertThrows(ChudException.class, () ->
+                Parser.parseTaskIndex("", 3, "mark"));
 
         assertTrue(exception.getMessage().contains("mark"));
     }
@@ -83,8 +83,8 @@ class ParserTest {
 
     @Test
     void parseTaskIndex_emptyTaskList_exceptionMentionsEmptyList() {
-        ChudException exception = assertThrows(ChudException.class,
-                () -> Parser.parseTaskIndex("1", 0, "mark"));
+        ChudException exception = assertThrows(ChudException.class, () ->
+                Parser.parseTaskIndex("1", 0, "mark"));
 
         assertTrue(exception.getMessage().contains("empty"));
     }
@@ -155,26 +155,26 @@ class ParserTest {
 
     @Test
     void parseEventArgs_toBeforeFrom_exceptionThrown() {
-        assertThrows(ChudException.class,
-                () -> Parser.parseEventArgs("project meeting /to 2019-12-02 /from 2019-12-03"));
+        assertThrows(ChudException.class, () ->
+                Parser.parseEventArgs("project meeting /to 2019-12-02 /from 2019-12-03"));
     }
 
     @Test
     void parseEventArgs_emptyDescription_exceptionThrown() {
-        assertThrows(ChudException.class,
-                () -> Parser.parseEventArgs("/from 2019-12-02 /to 2019-12-03"));
+        assertThrows(ChudException.class, () ->
+                Parser.parseEventArgs("/from 2019-12-02 /to 2019-12-03"));
     }
 
     @Test
     void parseEventArgs_emptyFromOrToValue_exceptionThrown() {
-        assertThrows(ChudException.class,
-                () -> Parser.parseEventArgs("project meeting /from /to 2019-12-03"));
+        assertThrows(ChudException.class, () ->
+                Parser.parseEventArgs("project meeting /from /to 2019-12-03"));
     }
 
     @Test
     void parseEventArgs_unparsableDateValue_exceptionThrown() {
-        assertThrows(ChudException.class,
-                () -> Parser.parseEventArgs("project meeting /from not-a-date /to 2019-12-03"));
+        assertThrows(ChudException.class, () ->
+                Parser.parseEventArgs("project meeting /from not-a-date /to 2019-12-03"));
     }
 
     // ---- parseOnDate ----
