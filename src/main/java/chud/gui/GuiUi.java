@@ -13,7 +13,7 @@ public class GuiUi extends Ui {
 
     @Override
     public void showWelcome() {
-        buffer.append("Hello! I'm Chud.\nWhat can I do for you?");
+        showMessage("Hello! I'm Chud.", "What can I do for you?");
     }
 
     @Override
@@ -22,8 +22,10 @@ public class GuiUi extends Ui {
     }
 
     @Override
-    public void showMessage(Object content) {
-        appendLine(String.valueOf(content));
+    public void showMessage(Object... contents) {
+        for (Object content : contents) {
+            appendLine(String.valueOf(content));
+        }
     }
 
     @Override

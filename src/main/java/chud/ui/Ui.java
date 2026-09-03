@@ -20,8 +20,7 @@ public class Ui {
     public void showWelcome() {
         System.out.println(HORIZONTAL_LINE);
         System.out.print(BANNER);
-        System.out.println("     Hello! I'm Chud.");
-        System.out.println("     What can I do for you?");
+        showMessage("Hello! I'm Chud.", "What can I do for you?");
         System.out.println(HORIZONTAL_LINE);
     }
 
@@ -30,9 +29,16 @@ public class Ui {
         System.out.println(HORIZONTAL_LINE);
     }
 
-    /** Prints one line of output at the standard message indent, e.g. "     Here are ...". */
-    public void showMessage(Object content) {
-        System.out.println("     " + content);
+    /**
+     * Prints one or more lines at the standard message indent, e.g. "     Here are ...", each
+     * on its own line. A single argument prints one line; several print each in turn, so a
+     * command with more than one fixed line to say (e.g. a greeting) can say it in one call
+     * instead of one call per line.
+     */
+    public void showMessage(Object... contents) {
+        for (Object content : contents) {
+            System.out.println("     " + content);
+        }
     }
 
     /** Prints one line of output at the deeper indent used to display a task under a message. */
