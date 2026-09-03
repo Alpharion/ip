@@ -124,7 +124,12 @@ def parse_test_plan(plan_path: Path):
 def compile_program(repo_root: Path, source_dir: str, build_dir: Path) -> Path:
     classes_dir = build_dir / "classes"
     classes_dir.mkdir(parents=True, exist_ok=True)
-    sources = sorted((repo_root / source_dir).glob("**/*.java"))
+    # The GUI package depends on JavaFX, which isn't on plain javac's classpath here and isn't
+    # needed for console testing anyway -- the console entry point (chud.Chud) never touches it.
+    sources = sorted(
+        p for p in (repo_root / source_dir).glob("**/*.java")
+        if "gui" not in p.relative_to(repo_root / source_dir).parts
+    )
     if not sources:
         raise ValueError(f"no .java files found in {source_dir}")
 
