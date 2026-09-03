@@ -79,8 +79,8 @@ class TaskDateTimeTest {
 
     @Test
     void parse_unrecognizedText_exceptionThrown() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> TaskDateTime.parse("not-a-date"));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                TaskDateTime.parse("not-a-date"));
 
         assertTrue(exception.getMessage().contains("not-a-date"));
     }

@@ -99,23 +99,23 @@ public class Storage {
 
         Task task;
         switch (tag) {
-        case "T":
-            task = new Todo(description);
-            break;
-        case "D":
-            if (fields.length < 4) {
-                throw new IllegalArgumentException("deadline is missing its '/by' field");
-            }
-            task = new Deadline(description, TaskDateTime.parse(fields[3]));
-            break;
-        case "E":
-            if (fields.length < 5) {
-                throw new IllegalArgumentException("event is missing its '/from' or '/to' field");
-            }
-            task = new Event(description, TaskDateTime.parse(fields[3]), TaskDateTime.parse(fields[4]));
-            break;
-        default:
-            throw new IllegalArgumentException("unrecognized task type tag '" + tag + "'");
+            case "T":
+                task = new Todo(description);
+                break;
+            case "D":
+                if (fields.length < 4) {
+                    throw new IllegalArgumentException("deadline is missing its '/by' field");
+                }
+                task = new Deadline(description, TaskDateTime.parse(fields[3]));
+                break;
+            case "E":
+                if (fields.length < 5) {
+                    throw new IllegalArgumentException("event is missing its '/from' or '/to' field");
+                }
+                task = new Event(description, TaskDateTime.parse(fields[3]), TaskDateTime.parse(fields[4]));
+                break;
+            default:
+                throw new IllegalArgumentException("unrecognized task type tag '" + tag + "'");
         }
         if (doneFlag.equals("1")) {
             task.markAsDone();

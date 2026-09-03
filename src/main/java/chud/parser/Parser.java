@@ -47,29 +47,29 @@ public class Parser {
         String commandWord = parseCommandWord(input);
         String arguments = parseArguments(input);
         switch (CommandWord.fromCommandWord(commandWord)) {
-        case LIST:
-            return new ListCommand();
-        case MARK:
-            return new MarkCommand(arguments);
-        case UNMARK:
-            return new UnmarkCommand(arguments);
-        case DELETE:
-            return new DeleteCommand(arguments);
-        case TODO:
-            return new AddTodoCommand(arguments);
-        case DEADLINE:
-            return new AddDeadlineCommand(arguments);
-        case EVENT:
-            return new AddEventCommand(arguments);
-        case ON:
-            return new OnCommand(arguments);
-        case FIND:
-            return new FindCommand(arguments);
-        case BYE:
-            return new ExitCommand();
-        case UNKNOWN:
-        default:
-            return new UnknownCommand(commandWord);
+            case LIST:
+                return new ListCommand();
+            case MARK:
+                return new MarkCommand(arguments);
+            case UNMARK:
+                return new UnmarkCommand(arguments);
+            case DELETE:
+                return new DeleteCommand(arguments);
+            case TODO:
+                return new AddTodoCommand(arguments);
+            case DEADLINE:
+                return new AddDeadlineCommand(arguments);
+            case EVENT:
+                return new AddEventCommand(arguments);
+            case ON:
+                return new OnCommand(arguments);
+            case FIND:
+                return new FindCommand(arguments);
+            case BYE:
+                return new ExitCommand();
+            case UNKNOWN:
+            default:
+                return new UnknownCommand(commandWord);
         }
     }
 
