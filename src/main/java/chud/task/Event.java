@@ -31,6 +31,11 @@ public class Event extends Task {
     }
 
     @Override
+    public LocalDate getSortDate() {
+        return from.getDate();
+    }
+
+    @Override
     public String toString() {
         return super.toString() + " (from: " + from + " to: " + to + ")";
     }

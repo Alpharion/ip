@@ -13,6 +13,8 @@ import chud.command.OnCommand;
 import chud.command.UnknownCommand;
 import chud.command.UnmarkCommand;
 import chud.exception.ChudException;
+import chud.task.SortDirection;
+import chud.task.SortKey;
 import chud.task.TaskDateTime;
 
 /**
@@ -48,7 +50,7 @@ public class Parser {
         String arguments = parseArguments(input);
         switch (CommandWord.fromCommandWord(commandWord)) {
             case LIST:
-                return new ListCommand();
+                return new ListCommand(arguments);
             case MARK:
                 return new MarkCommand(arguments);
             case UNMARK:
@@ -226,5 +228,54 @@ public class Parser {
             throw new ChudException("Tell me what keyword to search for, e.g. find book");
         }
         return arguments;
+    }
+
+    /** A list command's parsed {@code /sort} key and direction. */
+    public static class ListSortArgs {
+        public final SortKey key;
+        public final SortDirection direction;
+
+        private ListSortArgs(SortKey key, SortDirection direction) {
+            this.key = key;
+            this.direction = direction;
+        }
+    }
+
+    /**
+     * Parses a list command's optional {@code /sort <key> [asc|desc]} argument.
+     *
+     * @return null if arguments is empty, meaning no sort was requested.
+     * @throws ChudException If arguments is non-empty but isn't a well-formed {@code /sort}
+     *      option: missing the {@code /sort} marker, an unrecognized key, an unrecognized
+     *      direction, or extra trailing text.
+     */
+    public static ListSortArgs parseListSortArgs(String arguments) throws ChudException {
+        if (arguments.isEmpty()) {
+            return null;
+        }
+        String usage = "Try: list /sort date, list /sort description, list /sort type, "
+                + "or list /sort done (add 'desc' at the end to reverse, e.g. list /sort date desc).";
+        if (!arguments.startsWith("/sort ")) {
+            throw new ChudException("Unknown list option '" + arguments + "'. " + usage);
+        }
+        String[] tokens = arguments.substring("/sort ".length()).trim().split("\\s+");
+        if (tokens.length == 0 || tokens[0].isEmpty()) {
+            throw new ChudException("Tell me what to sort by. " + usage);
+        }
+        SortKey key = SortKey.fromArgument(tokens[0]);
+        if (key == null) {
+            throw new ChudException("'" + tokens[0] + "' isn't a sort key I understand. " + usage);
+        }
+        if (tokens.length > 2) {
+            throw new ChudException("Too many arguments after '/sort " + tokens[0] + "'. " + usage);
+        }
+        SortDirection direction = SortDirection.ASC;
+        if (tokens.length == 2) {
+            direction = SortDirection.fromArgument(tokens[1]);
+            if (direction == null) {
+                throw new ChudException("'" + tokens[1] + "' isn't 'asc' or 'desc'. " + usage);
+            }
+        }
+        return new ListSortArgs(key, direction);
     }
 }

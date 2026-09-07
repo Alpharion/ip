@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 
 import org.junit.jupiter.api.Test;
@@ -66,5 +67,24 @@ class TaskListTest {
 
         assertSame(first, iterator.next());
         assertSame(second, iterator.next());
+    }
+
+    @Test
+    void sort_byGivenComparator_reordersInPlaceStably() {
+        TaskList tasks = new TaskList();
+        Todo banana = new Todo("banana");
+        Todo apple = new Todo("apple");
+        Todo apricot = new Todo("apricot");
+        tasks.add(banana);
+        tasks.add(apple);
+        tasks.add(apricot);
+
+        // apple and apricot both start with 'a' -- a stable sort must keep apple before apricot,
+        // since that was their relative order before sorting.
+        tasks.sort(Comparator.comparing(task -> task.getDescription().substring(0, 1)));
+
+        assertSame(apple, tasks.get(0));
+        assertSame(apricot, tasks.get(1));
+        assertSame(banana, tasks.get(2));
     }
 }

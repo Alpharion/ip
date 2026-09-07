@@ -928,3 +928,148 @@ bye
      Bye. Hope to see you again soon!
     ____________________________________________________________
 ```
+
+## Test Case: Sort the task list
+
+**Aim:** `list /sort <key> [asc|desc]` reorders the task list by date, description, type, or done
+status, in ascending (default) or descending order; a Todo (no date) always sorts last under the
+`date` key regardless of direction. The reorder is permanent, so a later plain `list` shows the
+new order. A missing `/sort` marker, an unrecognized key, an unrecognized direction, or extra
+trailing arguments are each rejected with a specific error instead of crashing or silently doing
+nothing.
+
+**Input:**
+```
+todo pack bags
+deadline return book /by 2019-12-10
+event project meeting /from 2019-12-05 1400 /to 2019-12-05 1600
+deadline submit report /by 2019-12-01
+mark 1
+list /sort date
+list /sort date desc
+list /sort description
+list /sort type
+list /sort done
+list /sort
+list /sort bogus
+list /sort date bogus
+list /sort date asc extra
+bye
+```
+
+**Expected Output:**
+```
+    ____________________________________________________________
+  ____ _               _ 
+ / ___| |__  _   _  __| |
+| |   | '_ \| | | |/ _` |
+| |___| | | | |_| | (_| |
+ \____|_| |_|\__,_|\__,_|
+     Hello! I'm Chud.
+     What can I do for you?
+    ____________________________________________________________
+
+todo pack bags
+    ____________________________________________________________
+     Got it. I've added this task:
+       [T][ ] pack bags
+     Now you have 1 tasks in the list.
+    ____________________________________________________________
+
+deadline return book /by 2019-12-10
+    ____________________________________________________________
+     Got it. I've added this task:
+       [D][ ] return book (by: Dec 10 2019)
+     Now you have 2 tasks in the list.
+    ____________________________________________________________
+
+event project meeting /from 2019-12-05 1400 /to 2019-12-05 1600
+    ____________________________________________________________
+     Got it. I've added this task:
+       [E][ ] project meeting (from: Dec 05 2019, 2:00PM to: Dec 05 2019, 4:00PM)
+     Now you have 3 tasks in the list.
+    ____________________________________________________________
+
+deadline submit report /by 2019-12-01
+    ____________________________________________________________
+     Got it. I've added this task:
+       [D][ ] submit report (by: Dec 01 2019)
+     Now you have 4 tasks in the list.
+    ____________________________________________________________
+
+mark 1
+    ____________________________________________________________
+     Nice! I've marked this task as done:
+       [T][X] pack bags
+    ____________________________________________________________
+
+list /sort date
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[D][ ] submit report (by: Dec 01 2019)
+     2.[E][ ] project meeting (from: Dec 05 2019, 2:00PM to: Dec 05 2019, 4:00PM)
+     3.[D][ ] return book (by: Dec 10 2019)
+     4.[T][X] pack bags
+    ____________________________________________________________
+
+list /sort date desc
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[D][ ] return book (by: Dec 10 2019)
+     2.[E][ ] project meeting (from: Dec 05 2019, 2:00PM to: Dec 05 2019, 4:00PM)
+     3.[D][ ] submit report (by: Dec 01 2019)
+     4.[T][X] pack bags
+    ____________________________________________________________
+
+list /sort description
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[T][X] pack bags
+     2.[E][ ] project meeting (from: Dec 05 2019, 2:00PM to: Dec 05 2019, 4:00PM)
+     3.[D][ ] return book (by: Dec 10 2019)
+     4.[D][ ] submit report (by: Dec 01 2019)
+    ____________________________________________________________
+
+list /sort type
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[T][X] pack bags
+     2.[D][ ] return book (by: Dec 10 2019)
+     3.[D][ ] submit report (by: Dec 01 2019)
+     4.[E][ ] project meeting (from: Dec 05 2019, 2:00PM to: Dec 05 2019, 4:00PM)
+    ____________________________________________________________
+
+list /sort done
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[D][ ] return book (by: Dec 10 2019)
+     2.[D][ ] submit report (by: Dec 01 2019)
+     3.[E][ ] project meeting (from: Dec 05 2019, 2:00PM to: Dec 05 2019, 4:00PM)
+     4.[T][X] pack bags
+    ____________________________________________________________
+
+list /sort
+    ____________________________________________________________
+     OOPS!!! Unknown list option '/sort'. Try: list /sort date, list /sort description, list /sort type, or list /sort done (add 'desc' at the end to reverse, e.g. list /sort date desc).
+    ____________________________________________________________
+
+list /sort bogus
+    ____________________________________________________________
+     OOPS!!! 'bogus' isn't a sort key I understand. Try: list /sort date, list /sort description, list /sort type, or list /sort done (add 'desc' at the end to reverse, e.g. list /sort date desc).
+    ____________________________________________________________
+
+list /sort date bogus
+    ____________________________________________________________
+     OOPS!!! 'bogus' isn't 'asc' or 'desc'. Try: list /sort date, list /sort description, list /sort type, or list /sort done (add 'desc' at the end to reverse, e.g. list /sort date desc).
+    ____________________________________________________________
+
+list /sort date asc extra
+    ____________________________________________________________
+     OOPS!!! Too many arguments after '/sort date'. Try: list /sort date, list /sort description, list /sort type, or list /sort done (add 'desc' at the end to reverse, e.g. list /sort date desc).
+    ____________________________________________________________
+
+bye
+    ____________________________________________________________
+     Bye. Hope to see you again soon!
+    ____________________________________________________________
+```

@@ -22,6 +22,16 @@ public abstract class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    /** Returns this task's description. */
+    public String getDescription() {
+        return description;
+    }
+
+    /** Returns true if this task is marked done. */
+    public boolean isDone() {
+        return isDone;
+    }
+
     /** Marks this task as done. */
     public void markAsDone() {
         isDone = true;
@@ -41,6 +51,15 @@ public abstract class Task {
      */
     public boolean occursOn(LocalDate date) {
         return false;
+    }
+
+    /**
+     * Returns the date this task should be ordered by for the {@code list /sort date} option,
+     * or null if this task has no date. A plain Todo has no date, so the default implementation
+     * returns null; Deadline and Event override this with their own date field.
+     */
+    public LocalDate getSortDate() {
+        return null;
     }
 
     /**

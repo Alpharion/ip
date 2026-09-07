@@ -58,7 +58,7 @@ into the chat box (or the console). Task numbers referenced by `mark`/`unmark`/`
 | `todo DESCRIPTION` | `todo borrow book` | Adds a todo. |
 | `deadline DESCRIPTION /by WHEN` | `deadline return book /by 2019-12-02` | Adds a deadline. `WHEN` accepts `yyyy-MM-dd`, `d/M/yyyy`, or either with a trailing 24-hour time, e.g. `2019-12-02 1800`. |
 | `event DESCRIPTION /from WHEN /to WHEN` | `event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600` | Adds an event spanning a start and end date/time. |
-| `list` | `list` | Shows every task, numbered, with its done status. |
+| `list [/sort KEY [asc\|desc]]` | `list /sort date desc` | Shows every task, numbered, with its done status. With `/sort`, first permanently reorders the list by `KEY` (`date`, `description`, `type`, or `done`), ascending by default -- see below. |
 | `mark INDEX` | `mark 2` | Marks task 2 as done. |
 | `unmark INDEX` | `unmark 2` | Marks task 2 as not done. |
 | `delete INDEX` | `delete 2` | Removes task 2 from the list. |
@@ -68,3 +68,18 @@ into the chat box (or the console). Task numbers referenced by `mark`/`unmark`/`
 
 Tasks are saved automatically to `data/chud.txt` after every change and reloaded the next time
 Chud starts, so nothing is lost between sessions.
+
+### Sorting the list
+
+`list /sort KEY [asc|desc]` reorders the task list -- permanently, so the new order is what
+subsequent `mark`/`unmark`/`delete` task numbers, and future `list` calls, use. `asc` is the
+default if omitted.
+
+| `KEY` | Ascending order |
+|---|---|
+| `date` | Soonest first (a deadline's due date, or an event's start date). A todo has no date and always sorts last, in both directions. |
+| `description` | Alphabetically, case-insensitive. |
+| `type` | Todo, then Deadline, then Event. |
+| `done` | Not-done tasks before done tasks. |
+
+Plain `list` (no `/sort`) just shows the tasks in whatever order they're already in.
