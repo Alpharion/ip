@@ -2,6 +2,7 @@ package chud.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
@@ -77,5 +78,12 @@ class TodoTest {
         Todo todo = new Todo("Borrow Book");
 
         assertTrue(todo.matchesKeyword("book"));
+    }
+
+    @Test
+    void getSortDate_todoHasNoDate_returnsNull() {
+        Todo todo = new Todo("borrow book");
+
+        assertNull(todo.getSortDate());
     }
 }

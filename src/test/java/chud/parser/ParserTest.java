@@ -3,6 +3,7 @@ package chud.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -21,6 +22,8 @@ import chud.command.OnCommand;
 import chud.command.UnknownCommand;
 import chud.command.UnmarkCommand;
 import chud.exception.ChudException;
+import chud.task.SortDirection;
+import chud.task.SortKey;
 
 class ParserTest {
     // ---- parseCommandWord / parseArguments ----
@@ -204,6 +207,57 @@ class ParserTest {
     @Test
     void parseFindKeyword_empty_exceptionThrown() {
         assertThrows(ChudException.class, () -> Parser.parseFindKeyword(""));
+    }
+
+    // ---- parseListSortArgs ----
+
+    @Test
+    void parseListSortArgs_emptyArguments_returnsNull() throws ChudException {
+        assertNull(Parser.parseListSortArgs(""));
+    }
+
+    @Test
+    void parseListSortArgs_keyOnly_defaultsToAscending() throws ChudException {
+        Parser.ListSortArgs args = Parser.parseListSortArgs("/sort date");
+
+        assertEquals(SortKey.DATE, args.key);
+        assertEquals(SortDirection.ASC, args.direction);
+    }
+
+    @Test
+    void parseListSortArgs_keyAndDirection_returnsBoth() throws ChudException {
+        Parser.ListSortArgs args = Parser.parseListSortArgs("/sort date desc");
+
+        assertEquals(SortKey.DATE, args.key);
+        assertEquals(SortDirection.DESC, args.direction);
+    }
+
+    @Test
+    void parseListSortArgs_everyRecognizedKey_isAccepted() throws ChudException {
+        assertEquals(SortKey.DATE, Parser.parseListSortArgs("/sort date").key);
+        assertEquals(SortKey.DESCRIPTION, Parser.parseListSortArgs("/sort description").key);
+        assertEquals(SortKey.TYPE, Parser.parseListSortArgs("/sort type").key);
+        assertEquals(SortKey.DONE, Parser.parseListSortArgs("/sort done").key);
+    }
+
+    @Test
+    void parseListSortArgs_missingSortMarker_exceptionThrown() {
+        assertThrows(ChudException.class, () -> Parser.parseListSortArgs("date"));
+    }
+
+    @Test
+    void parseListSortArgs_unrecognizedKey_exceptionThrown() {
+        assertThrows(ChudException.class, () -> Parser.parseListSortArgs("/sort priority"));
+    }
+
+    @Test
+    void parseListSortArgs_unrecognizedDirection_exceptionThrown() {
+        assertThrows(ChudException.class, () -> Parser.parseListSortArgs("/sort date sideways"));
+    }
+
+    @Test
+    void parseListSortArgs_tooManyArguments_exceptionThrown() {
+        assertThrows(ChudException.class, () -> Parser.parseListSortArgs("/sort date asc extra"));
     }
 
     // ---- parse (dispatch) ----

@@ -51,4 +51,11 @@ class DeadlineTest {
 
         assertEquals("D | 0 | return book | 2019-12-02 1800", deadline.toFileString());
     }
+
+    @Test
+    void getSortDate_returnsByDate() {
+        Deadline deadline = new Deadline("return book", TaskDateTime.parse("2019-12-02 1800"));
+
+        assertEquals(LocalDate.of(2019, 12, 2), deadline.getSortDate());
+    }
 }

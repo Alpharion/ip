@@ -55,4 +55,9 @@ class EventTest {
     void toFileString_encodesTagDoneFlagDescriptionFromAndTo() {
         assertEquals("E | 0 | project meeting | 2019-12-02 | 2019-12-04", event.toFileString());
     }
+
+    @Test
+    void getSortDate_returnsFromDateNotToDate() {
+        assertEquals(LocalDate.of(2019, 12, 2), event.getSortDate());
+    }
 }

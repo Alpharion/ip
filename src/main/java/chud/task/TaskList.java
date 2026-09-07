@@ -1,6 +1,7 @@
 package chud.task;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
@@ -55,5 +56,14 @@ public class TaskList implements Iterable<Task> {
     /** Returns a sequential Stream over the tasks in this list, e.g. for filtering by keyword or date. */
     public Stream<Task> stream() {
         return tasks.stream();
+    }
+
+    /**
+     * Reorders the tasks in this list in place according to the given comparator, e.g. for the
+     * {@code list /sort} option. The sort is stable, so tasks that compare equal keep their
+     * existing relative order.
+     */
+    public void sort(Comparator<Task> comparator) {
+        tasks.sort(comparator);
     }
 }
