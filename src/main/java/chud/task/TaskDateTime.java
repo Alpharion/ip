@@ -37,6 +37,10 @@ public class TaskDateTime {
     private final LocalTime time; // null if no time of day was given
 
     private TaskDateTime(LocalDate date, LocalTime time) {
+        // A TaskDateTime always has a date -- only the time of day is optional (null means
+        // "date only"). getDate(), toString(), and toStorageString() all rely on date being
+        // non-null without checking it themselves.
+        assert date != null : "TaskDateTime must always have a date";
         this.date = date;
         this.time = time;
     }

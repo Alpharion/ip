@@ -23,6 +23,10 @@ public abstract class Command {
 
     /** Prints the standard "task added" confirmation shared by the three add-task commands. */
     protected static void showTaskAdded(Ui ui, Task task, int taskCount) {
+        // Every caller invokes this right after tasks.add(...), so the list can never be empty
+        // here -- this documents that showTaskAdded is meant only for that "just added" flow, not
+        // as a general-purpose task-count printer.
+        assert taskCount >= 1 : "showTaskAdded must be called right after a task was added";
         ui.showMessage("Got it. I've added this task:");
         ui.showIndentedMessage(task);
         ui.showMessage("Now you have " + taskCount + " tasks in the list.");

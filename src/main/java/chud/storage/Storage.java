@@ -117,6 +117,11 @@ public class Storage {
             default:
                 throw new IllegalArgumentException("unrecognized task type tag '" + tag + "'");
         }
+        // Every branch above either assigns task or throws, so task is never left uninitialized
+        // here -- this documents that the switch is exhaustive over the tags this method accepts,
+        // which isn't obvious from Java's flow analysis alone (it only requires task be assigned
+        // on every path, not that it's non-null).
+        assert task != null : "task must have been assigned by the switch above";
         if (doneFlag.equals("1")) {
             task.markAsDone();
         }
