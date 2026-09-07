@@ -1,5 +1,8 @@
 package chud.command;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import chud.exception.ChudException;
 import chud.parser.Parser;
 import chud.storage.Storage;
@@ -18,13 +21,13 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ChudException {
         String keyword = Parser.parseFindKeyword(arguments);
+        List<Task> matches = tasks.stream()
+                .filter(task -> task.matchesKeyword(keyword))
+                .collect(Collectors.toList());
+
         ui.showMessage("Here are the matching tasks in your list:");
-        int count = 0;
-        for (Task task : tasks) {
-            if (task.matchesKeyword(keyword)) {
-                count++;
-                ui.showMessage(count + "." + task);
-            }
+        for (int i = 0; i < matches.size(); i++) {
+            ui.showMessage((i + 1) + "." + matches.get(i));
         }
     }
 }

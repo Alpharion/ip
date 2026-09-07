@@ -2,6 +2,7 @@ package chud.task;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.stream.Stream;
 
 /**
  * The list of tasks the chatbot is tracking. Wraps the underlying storage collection so callers
@@ -44,5 +45,10 @@ public class TaskList implements Iterable<Task> {
     @Override
     public Iterator<Task> iterator() {
         return tasks.iterator();
+    }
+
+    /** Returns a sequential Stream over the tasks in this list, e.g. for filtering by keyword or date. */
+    public Stream<Task> stream() {
+        return tasks.stream();
     }
 }
