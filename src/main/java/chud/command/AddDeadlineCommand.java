@@ -19,8 +19,6 @@ public class AddDeadlineCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ChudException {
         Parser.DeadlineArgs deadlineArgs = Parser.parseDeadlineArgs(arguments);
-        tasks.add(new Deadline(deadlineArgs.description, deadlineArgs.by));
-        storage.save(tasks);
-        showTaskAdded(ui, tasks.get(tasks.size() - 1), tasks.size());
+        addTask(tasks, ui, storage, new Deadline(deadlineArgs.description, deadlineArgs.by));
     }
 }

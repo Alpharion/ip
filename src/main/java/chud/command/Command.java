@@ -21,10 +21,17 @@ public abstract class Command {
         return false;
     }
 
-    /** Prints the standard "task added" confirmation shared by the three add-task commands. */
-    protected static void showTaskAdded(Ui ui, Task task, int taskCount) {
+    /**
+     * Adds the given task to the list, saves the list to disk, and prints the standard
+     * "task added" confirmation -- the sequence shared by the three add-task commands
+     * (AddTodoCommand, AddDeadlineCommand, AddEventCommand), which otherwise differ only in
+     * which Task subtype they construct.
+     */
+    protected static void addTask(TaskList tasks, Ui ui, Storage storage, Task task) {
+        tasks.add(task);
+        storage.save(tasks);
         ui.showMessage("Got it. I've added this task:");
         ui.showIndentedMessage(task);
-        ui.showMessage("Now you have " + taskCount + " tasks in the list.");
+        ui.showMessage("Now you have " + tasks.size() + " tasks in the list.");
     }
 }

@@ -19,8 +19,6 @@ public class AddEventCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ChudException {
         Parser.EventArgs eventArgs = Parser.parseEventArgs(arguments);
-        tasks.add(new Event(eventArgs.description, eventArgs.from, eventArgs.to));
-        storage.save(tasks);
-        showTaskAdded(ui, tasks.get(tasks.size() - 1), tasks.size());
+        addTask(tasks, ui, storage, new Event(eventArgs.description, eventArgs.from, eventArgs.to));
     }
 }
