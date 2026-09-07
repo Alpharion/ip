@@ -19,8 +19,6 @@ public class AddTodoCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ChudException {
         String description = Parser.parseTodoDescription(arguments);
-        tasks.add(new Todo(description));
-        storage.save(tasks);
-        showTaskAdded(ui, tasks.get(tasks.size() - 1), tasks.size());
+        addTask(tasks, ui, storage, new Todo(description));
     }
 }
