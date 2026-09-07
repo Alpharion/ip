@@ -98,7 +98,12 @@ public class Parser {
             throw new ChudException("There is no task number " + taskNumber + ". "
                     + (taskCount == 0 ? "Your task list is empty." : "You have " + taskCount + " task(s)."));
         }
-        return taskNumber - 1;
+        int index = taskNumber - 1;
+        // Every out-of-range taskNumber was rejected above, so the 0-based index handed back
+        // must fall inside the list -- callers (Mark/Unmark/DeleteCommand) rely on this to index
+        // into TaskList without re-checking bounds themselves.
+        assert index >= 0 && index < taskCount : "parseTaskIndex must return a valid 0-based index";
+        return index;
     }
 
     /**

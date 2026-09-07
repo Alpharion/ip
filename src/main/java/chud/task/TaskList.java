@@ -28,11 +28,16 @@ public class TaskList implements Iterable<Task> {
 
     /** Removes and returns the task at the given 0-based index. */
     public Task remove(int index) {
+        // TaskList does no user-facing validation itself -- every index it's called with is
+        // expected to already have been checked by the caller (e.g. Parser.parseTaskIndex), so
+        // this documents that expectation rather than duplicating the bounds check.
+        assert index >= 0 && index < tasks.size() : "index must be a valid, already-validated position";
         return tasks.remove(index);
     }
 
     /** Returns the task at the given 0-based index. */
     public Task get(int index) {
+        assert index >= 0 && index < tasks.size() : "index must be a valid, already-validated position";
         return tasks.get(index);
     }
 
