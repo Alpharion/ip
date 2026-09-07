@@ -1,5 +1,10 @@
 package chud.gui;
 
+import chud.command.Command;
+import chud.exception.ChudException;
+import chud.parser.Parser;
+import chud.storage.Storage;
+import chud.task.TaskList;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -10,11 +15,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-import chud.command.Command;
-import chud.exception.ChudException;
-import chud.parser.Parser;
-import chud.storage.Storage;
-import chud.task.TaskList;
 
 /**
  * Controller for {@code MainWindow.fxml}: the scrollable column of chat bubbles, the text field

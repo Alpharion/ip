@@ -2,14 +2,13 @@ package chud.gui;
 
 import java.io.IOException;
 
+import chud.storage.Storage;
+import chud.task.TaskList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import chud.storage.Storage;
-import chud.task.TaskList;
 
 /**
  * The JavaFX application: builds Chud's backend (storage, task list, a GUI-buffering {@link

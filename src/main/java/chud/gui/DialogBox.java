@@ -5,20 +5,17 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
 /**
- * One chat bubble: a wrapped, padded {@link Label} inside an {@link HBox}, right-aligned and
- * blue for the user, left-aligned and grey for Chud.
+ * One chat bubble: a wrapped, padded {@link Label} inside an {@link HBox}, right-aligned for the
+ * user and left-aligned for Chud. Colors come from the {@code user-bubble}/{@code chud-bubble}
+ * style classes in {@code DarkTheme.css}, not inline styles, so the whole chat's palette stays
+ * defined in one place.
  */
 public class DialogBox extends HBox {
-    private static final String USER_STYLE = "-fx-background-color: #4a90d9; -fx-text-fill: white; "
-            + "-fx-background-radius: 12; -fx-padding: 8 12 8 12;";
-    private static final String CHUD_STYLE = "-fx-background-color: #e5e5ea; -fx-text-fill: black; "
-            + "-fx-background-radius: 12; -fx-padding: 8 12 8 12;";
-
     private DialogBox(String message, boolean isUser) {
         Label label = new Label(message);
         label.setWrapText(true);
         label.setMaxWidth(320);
-        label.setStyle(isUser ? USER_STYLE : CHUD_STYLE);
+        label.getStyleClass().add(isUser ? "user-bubble" : "chud-bubble");
 
         setAlignment(isUser ? Pos.CENTER_RIGHT : Pos.CENTER_LEFT);
         setSpacing(8);

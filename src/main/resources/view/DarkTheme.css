@@ -1,0 +1,98 @@
+/*
+ * Dark theme for Chud's chat window. Colors are grouped as named variables (JavaFX CSS's
+ * "-fx-*" custom properties) at the top so the palette can be tweaked in one place.
+ */
+.root {
+    -chud-bg: #1e1f26;
+    -chud-bg-alt: #262833;
+    -chud-bubble-chud: #2f313d;
+    -chud-bubble-user: #6c5ce7;
+    -chud-text: #e6e6f0;
+    -chud-text-dim: #9a9ab0;
+    -chud-accent: #8e7cf0;
+
+    -fx-background-color: -chud-bg;
+    -fx-font-family: "Segoe UI Semibold", "Segoe UI", "Helvetica Neue", "Inter", sans-serif;
+}
+
+.scroll-pane, .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .content {
+    -fx-background-color: -chud-bg;
+}
+
+/* Slim, unobtrusive scrollbar that matches the dark background instead of the OS default. */
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 10;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: -chud-bg-alt;
+    -fx-background-radius: 5;
+}
+
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: -chud-text-dim;
+}
+
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button {
+    -fx-pref-height: 0;
+}
+
+.dialog-container {
+    -fx-background-color: -chud-bg;
+}
+
+.chud-bubble {
+    -fx-background-color: -chud-bubble-chud;
+    -fx-text-fill: -chud-text;
+    -fx-background-radius: 14;
+    -fx-padding: 10 14 10 14;
+    -fx-font-size: 13px;
+}
+
+.user-bubble {
+    -fx-background-color: -chud-bubble-user;
+    -fx-text-fill: white;
+    -fx-background-radius: 14;
+    -fx-padding: 10 14 10 14;
+    -fx-font-size: 13px;
+}
+
+.text-input {
+    -fx-background-color: -chud-bg-alt;
+    -fx-text-fill: -chud-text;
+    -fx-prompt-text-fill: -chud-text-dim;
+    -fx-background-radius: 18;
+    -fx-padding: 8 14 8 14;
+    -fx-font-size: 13px;
+}
+
+.text-input:focused {
+    -fx-background-color: derive(-chud-bg-alt, 10%);
+}
+
+.send-button {
+    -fx-background-color: -chud-accent;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 18;
+    -fx-padding: 8 18 8 18;
+    -fx-cursor: hand;
+}
+
+.send-button:hover {
+    -fx-background-color: derive(-chud-accent, 15%);
+}
+
+.send-button:pressed {
+    -fx-background-color: derive(-chud-accent, -15%);
+}

@@ -9,22 +9,24 @@
 
 <AnchorPane maxHeight="Infinity" maxWidth="Infinity" minHeight="220" minWidth="400" prefHeight="500"
             prefWidth="400" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="chud.gui.MainWindow">
+            fx:controller="chud.gui.MainWindow" stylesheets="@DarkTheme.css">
     <children>
         <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
-                    AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                    AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                     AnchorPane.topAnchor="0.0">
             <content>
-                <VBox fx:id="dialogContainer" spacing="10.0">
+                <VBox fx:id="dialogContainer" spacing="12.0" styleClass="dialog-container">
                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                        <Insets bottom="14.0" left="14.0" right="14.0" top="14.0"/>
                     </padding>
                 </VBox>
             </content>
         </ScrollPane>
         <TextField fx:id="userInput" onAction="#handleUserInput" promptText="Type a command, e.g. list"
-                   AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="80.0"/>
+                   styleClass="text-input"
+                   AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="88.0"/>
         <Button fx:id="sendButton" mnemonicParsing="false" onAction="#handleUserInput" text="Send"
-                AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0"/>
+                styleClass="send-button"
+                AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="12.0"/>
     </children>
 </AnchorPane>
