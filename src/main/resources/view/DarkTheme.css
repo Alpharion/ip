@@ -3,13 +3,16 @@
  * "-fx-*" custom properties) at the top so the palette can be tweaked in one place.
  */
 .root {
-    -chud-bg: #1e1f26;
-    -chud-bg-alt: #262833;
-    -chud-bubble-chud: #2f313d;
-    -chud-bubble-user: #6c5ce7;
-    -chud-text: #e6e6f0;
+    -chud-bg: #1a1b22;
+    -chud-bg-alt: #23242e;
+    -chud-bubble-chud: #2e303c;
+    -chud-bubble-user: #23242e;
+    -chud-text: #eaeaf2;
     -chud-text-dim: #9a9ab0;
     -chud-accent: #8e7cf0;
+    -chud-error-bg: #3a2228;
+    -chud-error-text: #ffb4b0;
+    -chud-error-border: #e0626f;
 
     -fx-background-color: -chud-bg;
     -fx-font-family: "Segoe UI Semibold", "Segoe UI", "Helvetica Neue", "Inter", sans-serif;
@@ -51,24 +54,63 @@
     -fx-background-color: -chud-bg;
 }
 
+/*
+ * Chud's replies are the actual content people come here to read (a task list, a search result),
+ * so they get the most visual weight: the widest bubble (see DialogBox's CHUD_WIDTH_FRACTION),
+ * the largest font, the most padding, and a soft shadow that lifts it off the background.
+ */
 .chud-bubble {
     -fx-background-color: -chud-bubble-chud;
     -fx-text-fill: -chud-text;
-    -fx-background-radius: 14;
-    -fx-padding: 10 14 10 14;
-    -fx-font-size: 13px;
+    -fx-background-radius: 4 14 14 14;
+    -fx-padding: 12 16 12 16;
+    -fx-font-size: 13.5px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.35), 8, 0, 0, 2);
 }
 
+/*
+ * The user's own input is just a typed command being echoed back, not a chat message -- so it's
+ * deliberately the quieter of the two: smaller, monospaced (it reads as "what you typed", not
+ * prose), no avatar, and a background barely distinct from the page instead of a bold accent
+ * color or a shadow.
+ */
 .user-bubble {
     -fx-background-color: -chud-bubble-user;
-    -fx-text-fill: white;
-    -fx-background-radius: 14;
-    -fx-padding: 10 14 10 14;
-    -fx-font-size: 13px;
+    -fx-text-fill: -chud-text-dim;
+    -fx-background-radius: 12 4 12 12;
+    -fx-padding: 6 12 6 12;
+    -fx-font-size: 12px;
+    -fx-font-family: "Cascadia Mono", "Consolas", "Courier New", monospace;
+}
+
+/*
+ * An error reply keeps chud-bubble's shape/size but swaps in a warning palette and a left accent
+ * border, so a bad command is visually distinct at a glance rather than blending into normal
+ * output.
+ */
+.error-bubble {
+    -fx-background-color: -chud-error-bg;
+    -fx-text-fill: -chud-error-text;
+    -fx-background-radius: 4 14 14 14;
+    -fx-padding: 12 16 12 16;
+    -fx-font-size: 13.5px;
+    -fx-border-color: -chud-error-border;
+    -fx-border-width: 0 0 0 3;
+    -fx-border-radius: 4 0 0 0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.35), 8, 0, 0, 2);
+}
+
+/* A soft shadow gives Chud's avatar a touch of depth against the flat background. */
+.avatar {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.45), 5, 0, 0, 1);
+}
+
+.input-bar {
+    -fx-background-color: -chud-bg-alt;
 }
 
 .text-input {
-    -fx-background-color: -chud-bg-alt;
+    -fx-background-color: derive(-chud-bg-alt, 12%);
     -fx-text-fill: -chud-text;
     -fx-prompt-text-fill: -chud-text-dim;
     -fx-background-radius: 18;
@@ -77,7 +119,7 @@
 }
 
 .text-input:focused {
-    -fx-background-color: derive(-chud-bg-alt, 10%);
+    -fx-background-color: derive(-chud-bg-alt, 22%);
 }
 
 .send-button {

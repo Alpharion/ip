@@ -1,34 +1,78 @@
 package chud.gui;
 
+import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 /**
- * One chat bubble: a wrapped, padded {@link Label} inside an {@link HBox}, right-aligned for the
- * user and left-aligned for Chud. Colors come from the {@code user-bubble}/{@code chud-bubble}
- * style classes in {@code DarkTheme.css}, not inline styles, so the whole chat's palette stays
- * defined in one place.
+ * One entry in the chat log. The user's own input and Chud's replies are deliberately styled
+ * differently rather than as two sides of the same bubble -- this is a person typing commands at
+ * an app, not two people chatting, so the user's line reads as a quiet, compact "echo" of what
+ * was typed (right-aligned, muted, narrower, no avatar -- you already know who you are), while
+ * Chud's reply is the actual content people come here to read: left-aligned, full-weight, shown
+ * next to Chud's avatar, and free to use most of the window's width, since a `list`/`find` reply
+ * can be several lines long. An error reply gets its own style on top of Chud's, so a bad command
+ * stands out at a glance instead of blending into normal output.
  */
 public class DialogBox extends HBox {
-    private DialogBox(String message, boolean isUser) {
+    private static final double USER_WIDTH_FRACTION = 0.6;
+    private static final double CHUD_WIDTH_FRACTION = 0.78;
+    private static final double AVATAR_SIZE = 32;
+
+    private static final Image CHUD_AVATAR = new Image(
+            DialogBox.class.getResourceAsStream("/images/chud.png"));
+
+    private DialogBox(String message, String styleClass, Pos alignment,
+            ReadOnlyDoubleProperty containerWidth, double widthFraction, boolean showAvatar) {
         Label label = new Label(message);
         label.setWrapText(true);
-        label.setMaxWidth(320);
-        label.getStyleClass().add(isUser ? "user-bubble" : "chud-bubble");
+        label.maxWidthProperty().bind(containerWidth.multiply(widthFraction));
+        label.getStyleClass().add(styleClass);
 
-        setAlignment(isUser ? Pos.CENTER_RIGHT : Pos.CENTER_LEFT);
+        setAlignment(alignment);
         setSpacing(8);
-        getChildren().add(label);
+        if (showAvatar) {
+            getChildren().addAll(createAvatar(), label);
+        } else {
+            getChildren().add(label);
+        }
     }
 
-    /** Creates a right-aligned bubble for something the user typed. */
-    public static DialogBox getUserDialog(String message) {
-        return new DialogBox(message, true);
+    /** Returns a small, circularly-cropped ImageView of Chud's avatar. */
+    private static ImageView createAvatar() {
+        ImageView avatar = new ImageView(CHUD_AVATAR);
+        avatar.setFitWidth(AVATAR_SIZE);
+        avatar.setFitHeight(AVATAR_SIZE);
+        avatar.setPreserveRatio(false);
+        avatar.setSmooth(true);
+        avatar.setClip(new Circle(AVATAR_SIZE / 2, AVATAR_SIZE / 2, AVATAR_SIZE / 2));
+        avatar.getStyleClass().add("avatar");
+        return avatar;
     }
 
-    /** Creates a left-aligned bubble for one of Chud's replies. */
-    public static DialogBox getChudDialog(String message) {
-        return new DialogBox(message, false);
+    /**
+     * Creates a right-aligned, compact echo of something the user typed. Its width tracks
+     * {@code containerWidth} (the dialog column's width) so it stays sensibly sized as the
+     * window is resized.
+     */
+    public static DialogBox getUserDialog(String message, ReadOnlyDoubleProperty containerWidth) {
+        return new DialogBox(message, "user-bubble", Pos.CENTER_RIGHT, containerWidth,
+                USER_WIDTH_FRACTION, false);
+    }
+
+    /**
+     * Creates a left-aligned bubble (with Chud's avatar) for one of Chud's replies, styled as an
+     * error (distinct color/border) if {@code isError} is true. Its width tracks
+     * {@code containerWidth} the same way {@link #getUserDialog} does, but is allowed to grow
+     * wider, since replies (e.g. a task list) tend to need more room than a typed command does.
+     */
+    public static DialogBox getChudDialog(String message, boolean isError, ReadOnlyDoubleProperty containerWidth) {
+        String styleClass = isError ? "error-bubble" : "chud-bubble";
+        return new DialogBox(message, styleClass, Pos.CENTER_LEFT, containerWidth,
+                CHUD_WIDTH_FRACTION, true);
     }
 }

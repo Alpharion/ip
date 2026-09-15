@@ -48,7 +48,9 @@ public class MainWindow extends AnchorPane {
         this.ui = ui;
 
         ui.showWelcome();
-        dialogContainer.getChildren().add(DialogBox.getChudDialog(ui.flush()));
+        dialogContainer.getChildren().add(
+                DialogBox.getChudDialog(ui.flush(), false, dialogContainer.widthProperty()));
+        userInput.requestFocus();
     }
 
     /** Called when the user presses Enter or clicks Send: shows the exchange as two bubbles. */
@@ -66,9 +68,13 @@ public class MainWindow extends AnchorPane {
         } catch (ChudException e) {
             ui.showError(e.getMessage());
         }
+        boolean isError = ui.hasError();
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input),
-                DialogBox.getChudDialog(ui.flush()));
+                DialogBox.getUserDialog(input, dialogContainer.widthProperty()),
+                DialogBox.getChudDialog(ui.flush(), isError, dialogContainer.widthProperty()));
+        // Keep the caret in the input field so typing the next command doesn't need a re-click,
+        // whether this reply was triggered by pressing Enter or by clicking Send.
+        userInput.requestFocus();
 
         if (command.isExit()) {
             // Give the user a moment to read the goodbye message before the window closes.
