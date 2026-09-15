@@ -64,6 +64,24 @@ class StorageTest {
     }
 
     @Test
+    void save_filePathHasNoParentDirectory_doesNotThrow() throws Exception {
+        // A relative path with no directory component (e.g. Path.of("chud.txt")) has a null
+        // getParent() -- this must not crash trying to create a "parent" that doesn't exist.
+        String fileName = "chud-storage-test-no-parent.txt";
+        Storage storage = new Storage(fileName);
+        TaskList tasks = new TaskList();
+        tasks.add(new Todo("borrow book"));
+
+        try {
+            storage.save(tasks);
+
+            assertTrue(Files.exists(Path.of(fileName)));
+        } finally {
+            Files.deleteIfExists(Path.of(fileName));
+        }
+    }
+
+    @Test
     void load_corruptedLineAmongValidOnes_skipsOnlyTheCorruptedLine() throws Exception {
         Path filePath = tempDir.resolve("chud.txt");
         Files.writeString(filePath, String.join(System.lineSeparator(),

@@ -34,6 +34,11 @@ public class Chud {
                 isExit = command.isExit();
             } catch (ChudException e) {
                 ui.showError(e.getMessage());
+            } catch (RuntimeException e) {
+                // A command should only ever fail with ChudException (its expected, user-facing
+                // failure mode) -- this is a last-resort safety net against an unanticipated bug
+                // in a command's own logic, so one bad command can't crash the whole session.
+                ui.showError("something broke (" + e.getClass().getSimpleName() + "). Try again.");
             } finally {
                 ui.showLine();
             }
