@@ -20,7 +20,7 @@ public class UnmarkCommand extends Command {
         int taskIndex = Parser.parseTaskIndex(arguments, tasks.size(), "unmark");
         tasks.get(taskIndex).markAsNotDone();
         storage.save(tasks);
-        ui.showMessage("OK, I've marked this task as not done yet:");
+        ui.showMessage("mid, back to the grind 💀:");
         ui.showIndentedMessage(tasks.get(taskIndex));
     }
 }

@@ -28,13 +28,13 @@ bye
 | |   | '_ \| | | |/ _` |
 | |___| | | | |_| | (_| |
  \____|_| |_|\__,_|\__,_|
-     Hello! I'm Chud.
-     What can I do for you?
+     yo it's Chud 🗿
+     what we lockin in today?
     ____________________________________________________________
 
 bye
     ____________________________________________________________
-     Bye. Hope to see you again soon!
+     aight bye fr, stay locked in 🗿✌️
     ____________________________________________________________
 ```
 
@@ -56,20 +56,20 @@ bye
 | |   | '_ \| | | |/ _` |
 | |___| | | | |_| | (_| |
  \____|_| |_|\__,_|\__,_|
-     Hello! I'm Chud.
-     What can I do for you?
+     yo it's Chud 🗿
+     what we lockin in today?
     ____________________________________________________________
 
 todo borrow book
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [T][ ] borrow book
      Now you have 1 tasks in the list.
     ____________________________________________________________
 
 bye
     ____________________________________________________________
-     Bye. Hope to see you again soon!
+     aight bye fr, stay locked in 🗿✌️
     ____________________________________________________________
 ```
 
@@ -91,20 +91,20 @@ bye
 | |   | '_ \| | | |/ _` |
 | |___| | | | |_| | (_| |
  \____|_| |_|\__,_|\__,_|
-     Hello! I'm Chud.
-     What can I do for you?
+     yo it's Chud 🗿
+     what we lockin in today?
     ____________________________________________________________
 
 deadline return book /by 2/12/2019 1800
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [D][ ] return book (by: Dec 02 2019, 6:00PM)
      Now you have 1 tasks in the list.
     ____________________________________________________________
 
 bye
     ____________________________________________________________
-     Bye. Hope to see you again soon!
+     aight bye fr, stay locked in 🗿✌️
     ____________________________________________________________
 ```
 
@@ -126,20 +126,20 @@ bye
 | |   | '_ \| | | |/ _` |
 | |___| | | | |_| | (_| |
  \____|_| |_|\__,_|\__,_|
-     Hello! I'm Chud.
-     What can I do for you?
+     yo it's Chud 🗿
+     what we lockin in today?
     ____________________________________________________________
 
 event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [E][ ] project meeting (from: Dec 02 2019, 2:00PM to: Dec 02 2019, 4:00PM)
      Now you have 1 tasks in the list.
     ____________________________________________________________
 
 bye
     ____________________________________________________________
-     Bye. Hope to see you again soon!
+     aight bye fr, stay locked in 🗿✌️
     ____________________________________________________________
 ```
 
@@ -166,27 +166,27 @@ bye
 | |   | '_ \| | | |/ _` |
 | |___| | | | |_| | (_| |
  \____|_| |_|\__,_|\__,_|
-     Hello! I'm Chud.
-     What can I do for you?
+     yo it's Chud 🗿
+     what we lockin in today?
     ____________________________________________________________
 
 todo read book
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [T][ ] read book
      Now you have 1 tasks in the list.
     ____________________________________________________________
 
 todo return book
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [T][ ] return book
      Now you have 2 tasks in the list.
     ____________________________________________________________
 
 mark 1
     ____________________________________________________________
-     Nice! I've marked this task as done:
+     W rizz, secured the bag 🏆:
        [T][X] read book
     ____________________________________________________________
 
@@ -199,7 +199,7 @@ list
 
 unmark 1
     ____________________________________________________________
-     OK, I've marked this task as not done yet:
+     mid, back to the grind 💀:
        [T][ ] read book
     ____________________________________________________________
 
@@ -212,7 +212,7 @@ list
 
 bye
     ____________________________________________________________
-     Bye. Hope to see you again soon!
+     aight bye fr, stay locked in 🗿✌️
     ____________________________________________________________
 ```
 
@@ -234,18 +234,18 @@ bye
 | |   | '_ \| | | |/ _` |
 | |___| | | | |_| | (_| |
  \____|_| |_|\__,_|\__,_|
-     Hello! I'm Chud.
-     What can I do for you?
+     yo it's Chud 🗿
+     what we lockin in today?
     ____________________________________________________________
 
 frobnicate
     ____________________________________________________________
-     OOPS!!! I don't know what 'frobnicate' means. Try list, todo, deadline, event, on, find, mark, unmark, delete, or bye.
+     bruh 💀 I don't know what 'frobnicate' means. Try list, todo, deadline, event, on, find, mark, unmark, delete, or bye.
     ____________________________________________________________
 
 bye
     ____________________________________________________________
-     Bye. Hope to see you again soon!
+     aight bye fr, stay locked in 🗿✌️
     ____________________________________________________________
 ```
 
@@ -267,18 +267,18 @@ bye
 | |   | '_ \| | | |/ _` |
 | |___| | | | |_| | (_| |
  \____|_| |_|\__,_|\__,_|
-     Hello! I'm Chud.
-     What can I do for you?
+     yo it's Chud 🗿
+     what we lockin in today?
     ____________________________________________________________
 
 todo
     ____________________________________________________________
-     OOPS!!! The description of a todo cannot be empty. Try: todo borrow book
+     bruh 💀 The description of a todo cannot be empty. Try: todo borrow book
     ____________________________________________________________
 
 bye
     ____________________________________________________________
-     Bye. Hope to see you again soon!
+     aight bye fr, stay locked in 🗿✌️
     ____________________________________________________________
 ```
 
@@ -304,38 +304,38 @@ bye
 | |   | '_ \| | | |/ _` |
 | |___| | | | |_| | (_| |
  \____|_| |_|\__,_|\__,_|
-     Hello! I'm Chud.
-     What can I do for you?
+     yo it's Chud 🗿
+     what we lockin in today?
     ____________________________________________________________
 
 deadline
     ____________________________________________________________
-     OOPS!!! A deadline needs a '/by' date/time. Try: deadline return book /by 2019-10-15 1800
+     bruh 💀 A deadline needs a '/by' date/time. Try: deadline return book /by 2019-10-15 1800
     ____________________________________________________________
 
 deadline submit report
     ____________________________________________________________
-     OOPS!!! A deadline needs a '/by' date/time. Try: deadline return book /by 2019-10-15 1800
+     bruh 💀 A deadline needs a '/by' date/time. Try: deadline return book /by 2019-10-15 1800
     ____________________________________________________________
 
 deadline /by 2019-10-15
     ____________________________________________________________
-     OOPS!!! The description of a deadline cannot be empty. Try: deadline return book /by 2019-10-15 1800
+     bruh 💀 The description of a deadline cannot be empty. Try: deadline return book /by 2019-10-15 1800
     ____________________________________________________________
 
 deadline submit report /by
     ____________________________________________________________
-     OOPS!!! A deadline needs a '/by' date/time. Try: deadline return book /by 2019-10-15 1800
+     bruh 💀 A deadline needs a '/by' date/time. Try: deadline return book /by 2019-10-15 1800
     ____________________________________________________________
 
 deadline submit report /by not-a-date
     ____________________________________________________________
-     OOPS!!! 'not-a-date' isn't a date/time I understand. Try a format like 2019-10-15, 2019-10-15 1800, 2/12/2019, or 2/12/2019 1800.
+     bruh 💀 'not-a-date' isn't a date/time I understand. Try a format like 2019-10-15, 2019-10-15 1800, 2/12/2019, or 2/12/2019 1800.
     ____________________________________________________________
 
 bye
     ____________________________________________________________
-     Bye. Hope to see you again soon!
+     aight bye fr, stay locked in 🗿✌️
     ____________________________________________________________
 ```
 
@@ -361,38 +361,38 @@ bye
 | |   | '_ \| | | |/ _` |
 | |___| | | | |_| | (_| |
  \____|_| |_|\__,_|\__,_|
-     Hello! I'm Chud.
-     What can I do for you?
+     yo it's Chud 🗿
+     what we lockin in today?
     ____________________________________________________________
 
 event
     ____________________________________________________________
-     OOPS!!! An event needs both '/from' and '/to' date/times, in that order. Try: event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600
+     bruh 💀 An event needs both '/from' and '/to' date/times, in that order. Try: event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600
     ____________________________________________________________
 
 event meeting /from 2019-10-15
     ____________________________________________________________
-     OOPS!!! An event needs both '/from' and '/to' date/times, in that order. Try: event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600
+     bruh 💀 An event needs both '/from' and '/to' date/times, in that order. Try: event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600
     ____________________________________________________________
 
 event /from 2019-10-15 /to 2019-10-16
     ____________________________________________________________
-     OOPS!!! The description of an event cannot be empty. Try: event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600
+     bruh 💀 The description of an event cannot be empty. Try: event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600
     ____________________________________________________________
 
 event meeting /from /to 2019-10-16
     ____________________________________________________________
-     OOPS!!! The '/from' and '/to' date/times of an event cannot be empty. Try: event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600
+     bruh 💀 The '/from' and '/to' date/times of an event cannot be empty. Try: event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600
     ____________________________________________________________
 
 event meeting /from not-a-date /to 2019-10-16
     ____________________________________________________________
-     OOPS!!! 'not-a-date' isn't a date/time I understand. Try a format like 2019-10-15, 2019-10-15 1800, 2/12/2019, or 2/12/2019 1800.
+     bruh 💀 'not-a-date' isn't a date/time I understand. Try a format like 2019-10-15, 2019-10-15 1800, 2/12/2019, or 2/12/2019 1800.
     ____________________________________________________________
 
 bye
     ____________________________________________________________
-     Bye. Hope to see you again soon!
+     aight bye fr, stay locked in 🗿✌️
     ____________________________________________________________
 ```
 
@@ -419,45 +419,45 @@ bye
 | |   | '_ \| | | |/ _` |
 | |___| | | | |_| | (_| |
  \____|_| |_|\__,_|\__,_|
-     Hello! I'm Chud.
-     What can I do for you?
+     yo it's Chud 🗿
+     what we lockin in today?
     ____________________________________________________________
 
 mark
     ____________________________________________________________
-     OOPS!!! Tell me which task number, e.g. mark 2
+     bruh 💀 Tell me which task number, e.g. mark 2
     ____________________________________________________________
 
 mark abc
     ____________________________________________________________
-     OOPS!!! 'abc' is not a valid task number.
+     bruh 💀 'abc' is not a valid task number.
     ____________________________________________________________
 
 mark 5
     ____________________________________________________________
-     OOPS!!! There is no task number 5. Your task list is empty.
+     bruh 💀 There is no task number 5. Your task list is empty.
     ____________________________________________________________
 
 todo do laundry
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [T][ ] do laundry
      Now you have 1 tasks in the list.
     ____________________________________________________________
 
 mark 0
     ____________________________________________________________
-     OOPS!!! There is no task number 0. You have 1 task(s).
+     bruh 💀 There is no task number 0. You have 1 task(s).
     ____________________________________________________________
 
 unmark 99
     ____________________________________________________________
-     OOPS!!! There is no task number 99. You have 1 task(s).
+     bruh 💀 There is no task number 99. You have 1 task(s).
     ____________________________________________________________
 
 bye
     ____________________________________________________________
-     Bye. Hope to see you again soon!
+     aight bye fr, stay locked in 🗿✌️
     ____________________________________________________________
 ```
 
@@ -489,60 +489,60 @@ bye
 | |   | '_ \| | | |/ _` |
 | |___| | | | |_| | (_| |
  \____|_| |_|\__,_|\__,_|
-     Hello! I'm Chud.
-     What can I do for you?
+     yo it's Chud 🗿
+     what we lockin in today?
     ____________________________________________________________
 
 todo read book
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [T][ ] read book
      Now you have 1 tasks in the list.
     ____________________________________________________________
 
 deadline return book /by 2019-06-06
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [D][ ] return book (by: Jun 06 2019)
      Now you have 2 tasks in the list.
     ____________________________________________________________
 
 event project meeting /from 2019-08-06 1400 /to 2019-08-06 1600
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [E][ ] project meeting (from: Aug 06 2019, 2:00PM to: Aug 06 2019, 4:00PM)
      Now you have 3 tasks in the list.
     ____________________________________________________________
 
 todo join sports club
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [T][ ] join sports club
      Now you have 4 tasks in the list.
     ____________________________________________________________
 
 todo borrow book
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [T][ ] borrow book
      Now you have 5 tasks in the list.
     ____________________________________________________________
 
 mark 1
     ____________________________________________________________
-     Nice! I've marked this task as done:
+     W rizz, secured the bag 🏆:
        [T][X] read book
     ____________________________________________________________
 
 mark 2
     ____________________________________________________________
-     Nice! I've marked this task as done:
+     W rizz, secured the bag 🏆:
        [D][X] return book (by: Jun 06 2019)
     ____________________________________________________________
 
 mark 4
     ____________________________________________________________
-     Nice! I've marked this task as done:
+     W rizz, secured the bag 🏆:
        [T][X] join sports club
     ____________________________________________________________
 
@@ -558,7 +558,7 @@ list
 
 delete 3
     ____________________________________________________________
-     Noted. I've removed this task:
+     yeeted into the shadow realm 🫡:
        [E][ ] project meeting (from: Aug 06 2019, 2:00PM to: Aug 06 2019, 4:00PM)
      Now you have 4 tasks in the list.
     ____________________________________________________________
@@ -574,7 +574,7 @@ list
 
 bye
     ____________________________________________________________
-     Bye. Hope to see you again soon!
+     aight bye fr, stay locked in 🗿✌️
     ____________________________________________________________
 ```
 
@@ -601,35 +601,35 @@ bye
 | |   | '_ \| | | |/ _` |
 | |___| | | | |_| | (_| |
  \____|_| |_|\__,_|\__,_|
-     Hello! I'm Chud.
-     What can I do for you?
+     yo it's Chud 🗿
+     what we lockin in today?
     ____________________________________________________________
 
 delete
     ____________________________________________________________
-     OOPS!!! Tell me which task number, e.g. delete 2
+     bruh 💀 Tell me which task number, e.g. delete 2
     ____________________________________________________________
 
 delete abc
     ____________________________________________________________
-     OOPS!!! 'abc' is not a valid task number.
+     bruh 💀 'abc' is not a valid task number.
     ____________________________________________________________
 
 delete 1
     ____________________________________________________________
-     OOPS!!! There is no task number 1. Your task list is empty.
+     bruh 💀 There is no task number 1. Your task list is empty.
     ____________________________________________________________
 
 todo read book
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [T][ ] read book
      Now you have 1 tasks in the list.
     ____________________________________________________________
 
 delete 5
     ____________________________________________________________
-     OOPS!!! There is no task number 5. You have 1 task(s).
+     bruh 💀 There is no task number 5. You have 1 task(s).
     ____________________________________________________________
 
 list
@@ -640,7 +640,7 @@ list
 
 bye
     ____________________________________________________________
-     Bye. Hope to see you again soon!
+     aight bye fr, stay locked in 🗿✌️
     ____________________________________________________________
 ```
 
@@ -663,13 +663,13 @@ bye
 | |   | '_ \| | | |/ _` |
 | |___| | | | |_| | (_| |
  \____|_| |_|\__,_|\__,_|
-     Hello! I'm Chud.
-     What can I do for you?
+     yo it's Chud 🗿
+     what we lockin in today?
     ____________________________________________________________
 
   todo   pad book  
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [T][ ] pad book
      Now you have 1 tasks in the list.
     ____________________________________________________________
@@ -682,7 +682,7 @@ list
 
 bye  
     ____________________________________________________________
-     Bye. Hope to see you again soon!
+     aight bye fr, stay locked in 🗿✌️
     ____________________________________________________________
 ```
 
@@ -703,13 +703,13 @@ todo probe task
 | |   | '_ \| | | |/ _` |
 | |___| | | | |_| | (_| |
  \____|_| |_|\__,_|\__,_|
-     Hello! I'm Chud.
-     What can I do for you?
+     yo it's Chud 🗿
+     what we lockin in today?
     ____________________________________________________________
 
 todo probe task
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [T][ ] probe task
      Now you have 1 tasks in the list.
     ____________________________________________________________
@@ -739,34 +739,34 @@ bye
 | |   | '_ \| | | |/ _` |
 | |___| | | | |_| | (_| |
  \____|_| |_|\__,_|\__,_|
-     Hello! I'm Chud.
-     What can I do for you?
+     yo it's Chud 🗿
+     what we lockin in today?
     ____________________________________________________________
 
 todo pack bags
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [T][ ] pack bags
      Now you have 1 tasks in the list.
     ____________________________________________________________
 
 deadline return book /by 2/12/2019 1800
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [D][ ] return book (by: Dec 02 2019, 6:00PM)
      Now you have 2 tasks in the list.
     ____________________________________________________________
 
 event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [E][ ] project meeting (from: Dec 02 2019, 2:00PM to: Dec 02 2019, 4:00PM)
      Now you have 3 tasks in the list.
     ____________________________________________________________
 
 deadline submit report /by 2019-10-15
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [D][ ] submit report (by: Oct 15 2019)
      Now you have 4 tasks in the list.
     ____________________________________________________________
@@ -780,17 +780,17 @@ on 2019-12-02
 
 on
     ____________________________________________________________
-     OOPS!!! Tell me which date, e.g. on 2019-10-15
+     bruh 💀 Tell me which date, e.g. on 2019-10-15
     ____________________________________________________________
 
 on not-a-date
     ____________________________________________________________
-     OOPS!!! 'not-a-date' isn't a date/time I understand. Try a format like 2019-10-15, 2019-10-15 1800, 2/12/2019, or 2/12/2019 1800.
+     bruh 💀 'not-a-date' isn't a date/time I understand. Try a format like 2019-10-15, 2019-10-15 1800, 2/12/2019, or 2/12/2019 1800.
     ____________________________________________________________
 
 bye
     ____________________________________________________________
-     Bye. Hope to see you again soon!
+     aight bye fr, stay locked in 🗿✌️
     ____________________________________________________________
 ```
 
@@ -812,20 +812,20 @@ bye now please
 | |   | '_ \| | | |/ _` |
 | |___| | | | |_| | (_| |
  \____|_| |_|\__,_|\__,_|
-     Hello! I'm Chud.
-     What can I do for you?
+     yo it's Chud 🗿
+     what we lockin in today?
     ____________________________________________________________
 
 todo test task
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [T][ ] test task
      Now you have 1 tasks in the list.
     ____________________________________________________________
 
 bye now please
     ____________________________________________________________
-     Bye. Hope to see you again soon!
+     aight bye fr, stay locked in 🗿✌️
     ____________________________________________________________
 ```
 
@@ -856,40 +856,40 @@ bye
 | |   | '_ \| | | |/ _` |
 | |___| | | | |_| | (_| |
  \____|_| |_|\__,_|\__,_|
-     Hello! I'm Chud.
-     What can I do for you?
+     yo it's Chud 🗿
+     what we lockin in today?
     ____________________________________________________________
 
 todo read book
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [T][ ] read book
      Now you have 1 tasks in the list.
     ____________________________________________________________
 
 deadline return book /by 2019-06-06
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [D][ ] return book (by: Jun 06 2019)
      Now you have 2 tasks in the list.
     ____________________________________________________________
 
 todo do laundry
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [T][ ] do laundry
      Now you have 3 tasks in the list.
     ____________________________________________________________
 
 mark 1
     ____________________________________________________________
-     Nice! I've marked this task as done:
+     W rizz, secured the bag 🏆:
        [T][X] read book
     ____________________________________________________________
 
 mark 2
     ____________________________________________________________
-     Nice! I've marked this task as done:
+     W rizz, secured the bag 🏆:
        [D][X] return book (by: Jun 06 2019)
     ____________________________________________________________
 
@@ -920,12 +920,12 @@ find nope
 
 find
     ____________________________________________________________
-     OOPS!!! Tell me what keyword to search for, e.g. find book
+     bruh 💀 Tell me what keyword to search for, e.g. find book
     ____________________________________________________________
 
 bye
     ____________________________________________________________
-     Bye. Hope to see you again soon!
+     aight bye fr, stay locked in 🗿✌️
     ____________________________________________________________
 ```
 
@@ -965,41 +965,41 @@ bye
 | |   | '_ \| | | |/ _` |
 | |___| | | | |_| | (_| |
  \____|_| |_|\__,_|\__,_|
-     Hello! I'm Chud.
-     What can I do for you?
+     yo it's Chud 🗿
+     what we lockin in today?
     ____________________________________________________________
 
 todo pack bags
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [T][ ] pack bags
      Now you have 1 tasks in the list.
     ____________________________________________________________
 
 deadline return book /by 2019-12-10
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [D][ ] return book (by: Dec 10 2019)
      Now you have 2 tasks in the list.
     ____________________________________________________________
 
 event project meeting /from 2019-12-05 1400 /to 2019-12-05 1600
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [E][ ] project meeting (from: Dec 05 2019, 2:00PM to: Dec 05 2019, 4:00PM)
      Now you have 3 tasks in the list.
     ____________________________________________________________
 
 deadline submit report /by 2019-12-01
     ____________________________________________________________
-     Got it. I've added this task:
+     bet, locked in 🔒:
        [D][ ] submit report (by: Dec 01 2019)
      Now you have 4 tasks in the list.
     ____________________________________________________________
 
 mark 1
     ____________________________________________________________
-     Nice! I've marked this task as done:
+     W rizz, secured the bag 🏆:
        [T][X] pack bags
     ____________________________________________________________
 
@@ -1050,26 +1050,26 @@ list /sort done
 
 list /sort
     ____________________________________________________________
-     OOPS!!! Unknown list option '/sort'. Try: list /sort date, list /sort description, list /sort type, or list /sort done (add 'desc' at the end to reverse, e.g. list /sort date desc).
+     bruh 💀 Unknown list option '/sort'. Try: list /sort date, list /sort description, list /sort type, or list /sort done (add 'desc' at the end to reverse, e.g. list /sort date desc).
     ____________________________________________________________
 
 list /sort bogus
     ____________________________________________________________
-     OOPS!!! 'bogus' isn't a sort key I understand. Try: list /sort date, list /sort description, list /sort type, or list /sort done (add 'desc' at the end to reverse, e.g. list /sort date desc).
+     bruh 💀 'bogus' isn't a sort key I understand. Try: list /sort date, list /sort description, list /sort type, or list /sort done (add 'desc' at the end to reverse, e.g. list /sort date desc).
     ____________________________________________________________
 
 list /sort date bogus
     ____________________________________________________________
-     OOPS!!! 'bogus' isn't 'asc' or 'desc'. Try: list /sort date, list /sort description, list /sort type, or list /sort done (add 'desc' at the end to reverse, e.g. list /sort date desc).
+     bruh 💀 'bogus' isn't 'asc' or 'desc'. Try: list /sort date, list /sort description, list /sort type, or list /sort done (add 'desc' at the end to reverse, e.g. list /sort date desc).
     ____________________________________________________________
 
 list /sort date asc extra
     ____________________________________________________________
-     OOPS!!! Too many arguments after '/sort date'. Try: list /sort date, list /sort description, list /sort type, or list /sort done (add 'desc' at the end to reverse, e.g. list /sort date desc).
+     bruh 💀 Too many arguments after '/sort date'. Try: list /sort date, list /sort description, list /sort type, or list /sort done (add 'desc' at the end to reverse, e.g. list /sort date desc).
     ____________________________________________________________
 
 bye
     ____________________________________________________________
-     Bye. Hope to see you again soon!
+     aight bye fr, stay locked in 🗿✌️
     ____________________________________________________________
 ```

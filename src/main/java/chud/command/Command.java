@@ -30,7 +30,7 @@ public abstract class Command {
     protected static void addTask(TaskList tasks, Ui ui, Storage storage, Task task) {
         tasks.add(task);
         storage.save(tasks);
-        ui.showMessage("Got it. I've added this task:");
+        ui.showMessage("bet, locked in 🔒:");
         ui.showIndentedMessage(task);
         ui.showMessage("Now you have " + tasks.size() + " tasks in the list.");
     }

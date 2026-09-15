@@ -21,7 +21,7 @@ public class DeleteCommand extends Command {
         int taskIndex = Parser.parseTaskIndex(arguments, tasks.size(), "delete");
         Task removedTask = tasks.remove(taskIndex);
         storage.save(tasks);
-        ui.showMessage("Noted. I've removed this task:");
+        ui.showMessage("yeeted into the shadow realm 🫡:");
         ui.showIndentedMessage(removedTask);
         ui.showMessage("Now you have " + tasks.size() + " tasks in the list.");
     }
