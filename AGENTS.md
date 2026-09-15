@@ -44,6 +44,14 @@ All commit messages (proposed or created) and branch names must follow the SE-ED
 conventions — see the `seedu-git-standard` skill for the full checklist (subject line, body,
 branch naming).
 
+Whenever asked to commit, the commit message must follow standard Git/GitHub conventions:
+
+* **Subject line:** imperative mood (e.g. "Add", not "Added"/"Adds"), capitalized first letter,
+  no trailing period, at most 50 characters (72 is a hard limit).
+* **Body:** separated from the subject by one blank line, wrapped at 72 characters per line,
+  explaining *what* changed and *why* (not *how* — the diff already shows that).
+* Do not fabricate content: base the message only on the actual changes being committed.
+
 ## Testing after code changes
 
 After any code change that could affect the program's console behavior (new/changed commands, output formatting, task handling, etc.):
