@@ -10,6 +10,7 @@ import chud.ui.Ui;
  */
 public class GuiUi extends Ui {
     private final StringBuilder buffer = new StringBuilder();
+    private boolean hasError;
 
     @Override
     public void showWelcome() {
@@ -35,7 +36,10 @@ public class GuiUi extends Ui {
 
     @Override
     public void showError(String message) {
-        appendLine("OOPS!!! " + message);
+        hasError = true;
+        // No "OOPS!!!": the error bubble's color/border already signals "this is a problem",
+        // so the text itself doesn't need to shout too.
+        appendLine("⚠ " + message);
     }
 
     private void appendLine(String line) {
@@ -45,10 +49,19 @@ public class GuiUi extends Ui {
         buffer.append(line);
     }
 
+    /**
+     * Returns true if the reply currently buffered (since the last {@link #flush}) was an error,
+     * so the caller can style it differently before flushing.
+     */
+    public boolean hasError() {
+        return hasError;
+    }
+
     /** Returns everything buffered since the last {@link #flush}, as one multi-line reply. */
     public String flush() {
         String text = buffer.toString();
         buffer.setLength(0);
+        hasError = false;
         return text;
     }
 }
