@@ -20,7 +20,7 @@ public class MarkCommand extends Command {
         int taskIndex = Parser.parseTaskIndex(arguments, tasks.size(), "mark");
         tasks.get(taskIndex).markAsDone();
         storage.save(tasks);
-        ui.showMessage("Nice! I've marked this task as done:");
+        ui.showMessage("W rizz, secured the bag 🏆:");
         ui.showIndentedMessage(tasks.get(taskIndex));
     }
 }

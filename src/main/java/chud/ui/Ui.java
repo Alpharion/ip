@@ -20,7 +20,7 @@ public class Ui {
     public void showWelcome() {
         System.out.println(HORIZONTAL_LINE);
         System.out.print(BANNER);
-        showMessage("Hello! I'm Chud.", "What can I do for you?");
+        showMessage("yo it's Chud 🗿", "what we lockin in today?");
         System.out.println(HORIZONTAL_LINE);
     }
 
@@ -46,9 +46,12 @@ public class Ui {
         System.out.println("       " + content);
     }
 
-    /** Prints an error message in Chud's standard "OOPS!!!" format. */
+    /**
+     * Prints an error message in Chud's standard "bruh" format. The rest of the message stays
+     * plain and instructional (not slang) so the actual problem/fix is still easy to read.
+     */
     public void showError(String message) {
-        System.out.println("     OOPS!!! " + message);
+        System.out.println("     bruh 💀 " + message);
     }
 
     /**

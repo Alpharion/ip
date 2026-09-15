@@ -14,7 +14,7 @@ public class GuiUi extends Ui {
 
     @Override
     public void showWelcome() {
-        showMessage("Hello! I'm Chud.", "What can I do for you?");
+        showMessage("yo it's Chud 🗿", "what we lockin in today?");
     }
 
     @Override
