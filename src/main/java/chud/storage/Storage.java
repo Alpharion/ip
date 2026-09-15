@@ -36,7 +36,13 @@ public class Storage {
      */
     public void save(TaskList tasks) {
         try {
-            Files.createDirectories(filePath.getParent());
+            // getParent() is null when filePath has no directory component (e.g. just
+            // "chud.txt") -- createDirectories(null) would throw NullPointerException, so only
+            // call it when there's actually a parent directory to create.
+            Path parent = filePath.getParent();
+            if (parent != null) {
+                Files.createDirectories(parent);
+            }
             try (FileWriter writer = new FileWriter(filePath.toFile())) {
                 for (Task task : tasks) {
                     writer.write(task.toFileString() + System.lineSeparator());
