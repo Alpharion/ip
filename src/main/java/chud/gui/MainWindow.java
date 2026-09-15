@@ -62,11 +62,20 @@ public class MainWindow extends AnchorPane {
         }
         userInput.clear();
 
-        Command command = Parser.parse(input);
+        // command stays null if parsing/execution fails before a Command is ever built, so the
+        // isExit() check below can't run on it -- that's fine, since failing to parse/execute
+        // means nothing happened that would warrant exiting.
+        Command command = null;
         try {
+            command = Parser.parse(input);
             command.execute(tasks, ui, storage);
         } catch (ChudException e) {
             ui.showError(e.getMessage());
+        } catch (RuntimeException e) {
+            // A command should only ever fail with ChudException (its expected, user-facing
+            // failure mode) -- this is a last-resort safety net against an unanticipated bug in
+            // a command's own logic, so one bad command can't crash the whole GUI session.
+            ui.showError("something broke (" + e.getClass().getSimpleName() + "). Try again.");
         }
         boolean isError = ui.hasError();
         dialogContainer.getChildren().addAll(
@@ -76,7 +85,7 @@ public class MainWindow extends AnchorPane {
         // whether this reply was triggered by pressing Enter or by clicking Send.
         userInput.requestFocus();
 
-        if (command.isExit()) {
+        if (command != null && command.isExit()) {
             // Give the user a moment to read the goodbye message before the window closes.
             PauseTransition delay = new PauseTransition(Duration.seconds(1));
             delay.setOnFinished(event -> Platform.exit());

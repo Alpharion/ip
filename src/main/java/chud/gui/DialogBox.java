@@ -1,5 +1,7 @@
 package chud.gui;
 
+import java.io.InputStream;
+
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -23,8 +25,10 @@ public class DialogBox extends HBox {
     private static final double CHUD_WIDTH_FRACTION = 0.78;
     private static final double AVATAR_SIZE = 32;
 
-    private static final Image CHUD_AVATAR = new Image(
-            DialogBox.class.getResourceAsStream("/images/chud.png"));
+    // null if the avatar asset is missing or fails to load -- createAvatar() then skips adding
+    // an avatar entirely rather than the whole GUI crashing at class-load time over a cosmetic
+    // resource, e.g. if the packaged asset ever goes missing or gets corrupted.
+    private static final Image CHUD_AVATAR = loadAvatar();
 
     private DialogBox(String message, String styleClass, Pos alignment,
             ReadOnlyDoubleProperty containerWidth, double widthFraction, boolean showAvatar) {
@@ -35,15 +39,31 @@ public class DialogBox extends HBox {
 
         setAlignment(alignment);
         setSpacing(8);
-        if (showAvatar) {
-            getChildren().addAll(createAvatar(), label);
+        ImageView avatar = showAvatar ? createAvatar() : null;
+        if (avatar != null) {
+            getChildren().addAll(avatar, label);
         } else {
             getChildren().add(label);
         }
     }
 
-    /** Returns a small, circularly-cropped ImageView of Chud's avatar. */
+    /**
+     * Loads Chud's avatar image, or returns null if the resource is missing or fails to load --
+     * a broken/absent cosmetic asset shouldn't crash the whole GUI at class-load time.
+     */
+    private static Image loadAvatar() {
+        try (InputStream stream = DialogBox.class.getResourceAsStream("/images/chud.png")) {
+            return stream == null ? null : new Image(stream);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /** Returns a small, circularly-cropped ImageView of Chud's avatar, or null if it's unavailable. */
     private static ImageView createAvatar() {
+        if (CHUD_AVATAR == null) {
+            return null;
+        }
         ImageView avatar = new ImageView(CHUD_AVATAR);
         avatar.setFitWidth(AVATAR_SIZE);
         avatar.setFitHeight(AVATAR_SIZE);
