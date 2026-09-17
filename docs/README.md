@@ -3,7 +3,7 @@
 **Chud** is a desktop chatbot that tracks your todos, deadlines, and events -- typed as one-line
 commands into a chat window, in a voice that's a little too locked in.
 
-![Chud's chat window, showing a todo already added, a deadline error being corrected, and the resulting list](Chud_ss.png)
+![Chud's chat window, showing a todo already added, a deadline error being corrected, and the resulting list](Ui.png)
 
 ## Quick start
 
