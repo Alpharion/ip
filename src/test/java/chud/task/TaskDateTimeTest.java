@@ -1,6 +1,7 @@
 package chud.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -136,5 +137,41 @@ class TaskDateTimeTest {
         TaskDateTime reloaded = TaskDateTime.parse(original.toStorageString());
 
         assertEquals(original.toString(), reloaded.toString());
+    }
+
+    @Test
+    void isBefore_earlierDate_returnsTrue() {
+        TaskDateTime earlier = TaskDateTime.parse("2026-09-21");
+        TaskDateTime later = TaskDateTime.parse("2026-09-22");
+
+        assertTrue(earlier.isBefore(later));
+        assertFalse(later.isBefore(earlier));
+    }
+
+    @Test
+    void isBefore_sameDateEarlierTime_returnsTrue() {
+        TaskDateTime earlier = TaskDateTime.parse("2026-09-22 0900");
+        TaskDateTime later = TaskDateTime.parse("2026-09-22 1800");
+
+        assertTrue(earlier.isBefore(later));
+        assertFalse(later.isBefore(earlier));
+    }
+
+    @Test
+    void isBefore_equalDateTime_returnsFalse() {
+        TaskDateTime first = TaskDateTime.parse("2026-09-22 0900");
+        TaskDateTime second = TaskDateTime.parse("2026-09-22 0900");
+
+        assertFalse(first.isBefore(second));
+    }
+
+    @Test
+    void isBefore_dateOnlyTreatedAsMidnight_isBeforeSameDateWithLaterTime() {
+        // A date-only value has no time of day; comparing it must treat it as the start of that
+        // date (midnight), not as "no time" (which would make comparison meaningless).
+        TaskDateTime dateOnly = TaskDateTime.parse("2026-09-22");
+        TaskDateTime sameDateWithTime = TaskDateTime.parse("2026-09-22 0001");
+
+        assertTrue(dateOnly.isBefore(sameDateWithTime));
     }
 }

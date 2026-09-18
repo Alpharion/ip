@@ -199,11 +199,22 @@ public class Parser {
             throw new ChudException("The '/from' and '/to' date/times of an event cannot be empty. "
                     + "Try: event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600");
         }
+        TaskDateTime from;
+        TaskDateTime to;
         try {
-            return new EventArgs(description, TaskDateTime.parse(fromText), TaskDateTime.parse(toText));
+            from = TaskDateTime.parse(fromText);
+            to = TaskDateTime.parse(toText);
         } catch (IllegalArgumentException e) {
             throw new ChudException(e.getMessage());
         }
+        // The /from and /to markers being in the right order in the text (checked above) says
+        // nothing about whether the dates they carry are -- "/from 2026-09-22 /to 2026-09-21" is
+        // marker-order-correct but still an event that ends before it starts.
+        if (to.isBefore(from)) {
+            throw new ChudException("An event's '/to' date/time can't be before its '/from' date/time. "
+                    + "Try: event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600");
+        }
+        return new EventArgs(description, from, to);
     }
 
     /**
