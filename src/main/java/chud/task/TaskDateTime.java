@@ -78,6 +78,18 @@ public class TaskDateTime {
         return date;
     }
 
+    /**
+     * Returns true if this date/time is strictly earlier than other's, for validating that an
+     * event's end isn't before its start. A missing time of day is treated as midnight (the
+     * start of that date) for the comparison, consistent with how a date-only value is otherwise
+     * treated as covering the whole day.
+     */
+    public boolean isBefore(TaskDateTime other) {
+        LocalDateTime thisDateTime = LocalDateTime.of(date, time == null ? LocalTime.MIN : time);
+        LocalDateTime otherDateTime = LocalDateTime.of(other.date, other.time == null ? LocalTime.MIN : other.time);
+        return thisDateTime.isBefore(otherDateTime);
+    }
+
     /** Encodes this date/time for the plain-text save file, in a form {@link #parse} understands. */
     public String toStorageString() {
         return time == null

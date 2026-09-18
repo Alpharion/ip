@@ -157,9 +157,33 @@ class ParserTest {
     }
 
     @Test
-    void parseEventArgs_toBeforeFrom_exceptionThrown() {
+    void parseEventArgs_toMarkerBeforeFromMarker_exceptionThrown() {
+        // The /to marker appearing before /from in the text is rejected on its own, regardless
+        // of what dates follow -- this is a textual-order check, distinct from the chronological
+        // check below.
         assertThrows(ChudException.class, () ->
                 Parser.parseEventArgs("project meeting /to 2019-12-02 /from 2019-12-03"));
+    }
+
+    @Test
+    void parseEventArgs_toDateChronologicallyBeforeFromDate_exceptionThrown() {
+        // Markers are in the right textual order (/from before /to), but the /to date is
+        // earlier than the /from date -- this must still be rejected.
+        ChudException exception = assertThrows(ChudException.class, () ->
+                Parser.parseEventArgs("project meeting /from 2026-09-22 /to 2026-09-21"));
+
+        assertTrue(exception.getMessage().contains("can't be before"));
+    }
+
+    @Test
+    void parseEventArgs_toDateSameAsFromDate_doesNotThrow() throws ChudException {
+        // An event starting and ending at the same instant is a degenerate case, not a reversed
+        // one -- only a /to strictly before /from should be rejected.
+        Parser.EventArgs args = Parser.parseEventArgs(
+                "project meeting /from 2026-09-22 0900 /to 2026-09-22 0900");
+
+        assertEquals("Sep 22 2026, 9:00AM", args.from.toString());
+        assertEquals("Sep 22 2026, 9:00AM", args.to.toString());
     }
 
     @Test

@@ -341,7 +341,7 @@ bye
 
 ## Test Case: Event validation errors
 
-**Aim:** An `event` missing its `/from`/`/to` markers, with an empty description or empty `/from`/`/to` value, or with a `/from`/`/to` value that isn't a date/time in a recognized format, is rejected with a specific, correctable error instead of crashing.
+**Aim:** An `event` missing its `/from`/`/to` markers, with an empty description or empty `/from`/`/to` value, with a `/from`/`/to` value that isn't a date/time in a recognized format, or with a `/to` date/time chronologically before its `/from` (even though the markers themselves are in the right order), is rejected with a specific, correctable error instead of crashing or being silently accepted.
 
 **Input:**
 ```
@@ -350,6 +350,7 @@ event meeting /from 2019-10-15
 event /from 2019-10-15 /to 2019-10-16
 event meeting /from /to 2019-10-16
 event meeting /from not-a-date /to 2019-10-16
+event reversed /from 2026-09-22 /to 2026-09-21
 bye
 ```
 
@@ -388,6 +389,11 @@ event meeting /from /to 2019-10-16
 event meeting /from not-a-date /to 2019-10-16
     ____________________________________________________________
      bruh 💀 'not-a-date' isn't a date/time I understand. Try a format like 2019-10-15, 2019-10-15 1800, 2/12/2019, or 2/12/2019 1800.
+    ____________________________________________________________
+
+event reversed /from 2026-09-22 /to 2026-09-21
+    ____________________________________________________________
+     bruh 💀 An event's '/to' date/time can't be before its '/from' date/time. Try: event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600
     ____________________________________________________________
 
 bye
